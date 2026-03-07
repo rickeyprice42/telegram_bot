@@ -5,9 +5,10 @@ main_menu = ReplyKeyboardMarkup(
     keyboard=[
         [
             KeyboardButton(text="📊 Профиль"),
-            KeyboardButton(text="⚙️ Настройки")
+            KeyboardButton(text="👥 Статистика")
         ],
         [
+            KeyboardButton(text="⚙️ Настройки"),
             KeyboardButton(text="ℹ️ Помощь")
         ]
     ],

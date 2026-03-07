@@ -9,9 +9,14 @@ from config import BOT_TOKEN
 from handlers.start import router as start_router
 from handlers.menu import router as menu_router
 
+from database.database import init_db
+
 
 async def main():
     logging.basicConfig(level=logging.INFO)
+
+    # Инициализация базы данных
+    init_db()
 
     bot = Bot(
         token=BOT_TOKEN,
