@@ -1,0 +1,9 @@
+2026-03-08 14:50:20,559 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/start
+2026-03-08 14:50:27,188 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=⚙️ Настройки
+2026-03-08 14:50:29,287 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=ℹ️ Помощь
+2026-03-08 14:50:32,101 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🛠 Админ-панель
+2026-03-08 14:50:40,405 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📊 Профиль
+2026-03-08 14:50:43,368 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/stats
+2026-03-08 14:50:46,384 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/broadcast
+2026-03-08 14:50:48,033 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/cancel
+2026-03-08 14:51:20,938 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📊 Профиль

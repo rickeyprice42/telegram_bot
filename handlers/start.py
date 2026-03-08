@@ -1,39 +1,79 @@
-import logging
+﻿import logging
 
-from aiogram import Router
+from aiogram import Bot, F, Router
+from aiogram.exceptions import TelegramBadRequest
 from aiogram.filters import Command
-from aiogram.types import Message
+from aiogram.types import CallbackQuery, Message
 
-from database.models import add_user
-from keyboards.menu_keyboard import main_menu
+from config import CHANNEL_ID
+from keyboards.menu_keyboard import get_main_menu
+from keyboards.subscription_keyboard import subscribe_keyboard
 
 router = Router()
 logger = logging.getLogger(__name__)
 
 
+async def check_subscription(bot: Bot, user_id: int) -> bool | None:
+    try:
+        member = await bot.get_chat_member(CHANNEL_ID, user_id)
+        return member.status in {"member", "administrator", "creator"}
+    except TelegramBadRequest as e:
+        # Most common reason: bot is not admin in channel / wrong channel id.
+        if "member list is inaccessible" in str(e):
+            logger.exception(
+                "Subscription check is not available. "
+                "Make sure bot is admin in channel %s",
+                CHANNEL_ID,
+            )
+            return None
+        raise
+
+
 @router.message(Command("start"))
-async def cmd_start(message: Message):
-
+async def cmd_start(message: Message, bot: Bot):
     user_id = message.from_user.id
-    username = message.from_user.username
-    first_name = message.from_user.first_name
+    subscribed = await check_subscription(bot, user_id)
 
-    # Добавляем пользователя в базу
-    is_new_user = add_user(user_id, username, first_name)
-    logger.info(
-        "User saved to DB: user_id=%s username=%s first_name=%s new_user=%s",
-        user_id,
-        username,
-        first_name,
-        is_new_user,
-    )
+    if subscribed is None:
+        await message.answer(
+            "Не удалось проверить подписку.\n"
+            "Проверьте, что бот добавлен в канал как администратор."
+        )
+        return
 
-    text = (
-        f"Привет, {first_name}!\n\n"
-        "Добро пожаловать в бота🚀"
-    )
+    if not subscribed:
+        await message.answer(
+            "📣 Для использования бота подпишитесь на канал Neural Hub.",
+            reply_markup=subscribe_keyboard,
+        )
+        return
 
     await message.answer(
-        text,
-        reply_markup=main_menu
+        f"Привет, {message.from_user.first_name}!",
+        reply_markup=get_main_menu(message.from_user.id),
     )
+
+
+@router.callback_query(F.data == "check_subscription")
+async def callback_check_subscription(callback: CallbackQuery, bot: Bot):
+    subscribed = await check_subscription(bot, callback.from_user.id)
+
+    if subscribed is None:
+        await callback.answer(
+            "Проверка временно недоступна. Сообщите администратору.",
+            show_alert=True,
+        )
+        return
+
+    if not subscribed:
+        await callback.answer(
+            "Вы еще не подписаны на канал.",
+            show_alert=True,
+        )
+        return
+
+    await callback.message.answer(
+        f"Привет, {callback.from_user.first_name}!",
+        reply_markup=get_main_menu(callback.from_user.id),
+    )
+    await callback.answer("Подписка подтверждена ✅")

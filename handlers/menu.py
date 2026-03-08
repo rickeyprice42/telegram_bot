@@ -24,18 +24,6 @@ async def profile_handler(message: Message):
 
     await message.answer(text)
 
-@router.message(F.text == "👥 Статистика")
-async def stats_handler(message: Message):
-
-    users_count = get_users_count()
-
-    text = (
-        "📊 <b>Статистика бота</b>\n\n"
-        f"👤 Пользователей: {users_count}"
-    )
-
-    await message.answer(text)
-
 @router.message(F.text == "⚙️ Настройки")
 async def settings_handler(message: Message):
     await message.answer("Здесь будут настройки.")

@@ -39,3 +39,15 @@ def get_users_count():
 
     conn.close()
     return count
+
+def get_all_users():
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT user_id FROM users")
+
+    users = cursor.fetchall()
+
+    conn.close()
+
+    return users
