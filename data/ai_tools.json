@@ -1,0 +1,68 @@
+{
+  "categories": {
+    "images": {
+      "title": "🖼 Генерация изображений",
+      "tools": [
+        {
+          "id": "midjourney",
+          "name": "Midjourney",
+          "description": "Одна из лучших нейросетей для генерации изображений",
+          "link": "https://midjourney.com",
+          "image": "https://s10.iimage.su/s/09/uamlhZxxuy7LBIBMqWzHc2nCNDKVSA4QvvdaXdCN6.jpg"
+        },
+        {
+          "id": "leonardo",
+          "name": "Leonardo AI",
+          "description": "Бесплатная генерация изображений",
+          "link": "https://leonardo.ai",
+          "image": "https://s10.iimage.su/s/09/uJw8sq6xvf5zE29vXjcS5cLWGtW3QowBzMULYkka1.webp"
+        }
+      ]
+    },
+
+    "programming": {
+      "title": "💻 Программирование",
+      "tools": [
+        {
+          "id": "chatgpt",
+          "name": "ChatGPT",
+          "description": "Помогает писать и объяснять код",
+          "link": "https://chat.openai.com",
+          "image": "https://s0.rbk.ru/v6_top_pics/media/img/1/71/347285218449711.jpeg"
+        },
+        {
+          "id": "github_copilot",
+          "name": "GitHub Copilot",
+          "description": "AI автодополнение кода",
+          "link": "https://github.com/features/copilot",
+          "image": "https://media.proglib.io/posts/2023/08/24/42559ff2ac27db1a63cc9cb40591a59d.jpg"
+        }
+      ]
+    },
+
+    "presentations": {
+      "title": "📊 Презентации",
+      "tools": [
+        {
+          "id": "gamma",
+          "name": "Gamma",
+          "description": "AI для создания презентаций",
+          "link": "https://gamma.app",
+          "image": "https://imgproxy.gamma.app/resize/quality:80/width:1920/https://images.ctfassets.net/30c0u70rkzek/8aM99zbuPcYI0WI9nRB0Z/032fc453bae91f96b52b31578418b07f/Why_gamma.png"
+        }
+      ]
+    },
+    "gaming": {
+      "title": "🎮 Игры",
+      "tools": [
+        {
+          "id": "gemini",
+          "name": "Gemini",
+          "description": "AI для создания игр и игровых персонажей",
+          "link": "https://gemini.google.com",
+          "image": "https://habrastorage.org/getpro/habr/upload_files/56c/df4/439/56cdf44395773d2ae492b1319bd0ed47.jpg"
+        }
+      ]
+    }
+  }
+}

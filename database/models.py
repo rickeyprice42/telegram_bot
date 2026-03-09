@@ -15,6 +15,83 @@ def add_user(user_id, username, first_name):
     conn.close()
     return is_new_user
 
+def create_favorites_table():
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS favorites (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            tool_id TEXT
+        )
+    """)
+
+    conn.commit()
+    conn.close()
+
+def add_favorite(user_id, tool_id):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "INSERT INTO favorites (user_id, tool_id) VALUES (?, ?)",
+        (user_id, tool_id)
+    )
+
+    conn.commit()
+    conn.close()
+
+def is_favorite(user_id, tool_id):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT 1 FROM favorites WHERE user_id=? AND tool_id=?",
+        (user_id, tool_id)
+    )
+
+    result = cursor.fetchone()
+
+    conn.close()
+
+    return result is not None
+
+def remove_favorite(user_id, tool_id):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "DELETE FROM favorites WHERE user_id=? AND tool_id=?",
+        (user_id, tool_id)
+    )
+
+    deleted = cursor.rowcount > 0
+
+    conn.commit()
+    conn.close()
+
+    return deleted
+
+def get_user_favorites(user_id):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT tool_id FROM favorites WHERE user_id=?",
+        (user_id,)
+    )
+
+    tools = cursor.fetchall()
+
+    conn.close()
+
+    return [tool[0] for tool in tools]
+
 def get_user(user_id):
     conn = get_connection()
     cursor = conn.cursor()

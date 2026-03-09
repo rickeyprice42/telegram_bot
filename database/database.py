@@ -24,5 +24,13 @@ def init_db():
     )
     """)
 
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS favorites (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        tool_id TEXT
+    )
+    """)
+
     conn.commit()
     conn.close()

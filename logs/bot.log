@@ -7,3 +7,133 @@
 2026-03-08 14:50:46,384 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/broadcast
 2026-03-08 14:50:48,033 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/cancel
 2026-03-08 14:51:20,938 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📊 Профиль
+2026-03-09 12:09:36,429 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/start
+2026-03-09 12:31:28,357 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=/start
+2026-03-09 12:31:37,137 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📚 Каталог нейросетей
+2026-03-09 12:31:42,727 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=🖼 Генерация изображений
+2026-03-09 12:31:48,881 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=⬅️ Назад
+2026-03-09 12:31:56,953 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=⬅️ Назад
+2026-03-09 12:32:04,283 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=💻 Программирование
+2026-03-09 12:32:09,155 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📊 Презентации
+2026-03-09 12:32:29,020 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=/start
+2026-03-09 12:43:26,081 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=/start
+2026-03-09 12:43:29,084 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📚 Каталог нейросетей
+2026-03-09 12:43:31,913 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=🖼 Генерация изображений
+2026-03-09 12:43:38,375 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=⬅️ Назад
+2026-03-09 12:50:15,350 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=/start
+2026-03-09 12:50:21,009 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📊 Профиль
+2026-03-09 12:50:24,994 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📚 Каталог нейросетей
+2026-03-09 12:50:28,302 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=🖼 Генерация изображений
+2026-03-09 12:50:31,108 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=⬅️ Назад
+2026-03-09 12:50:35,392 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=⬅️ Назад
+2026-03-09 12:50:58,757 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📚 Каталог нейросетей
+2026-03-09 12:51:00,275 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=⬅️ Назад
+2026-03-09 12:51:14,698 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📚 Каталог нейросетей
+2026-03-09 12:51:22,640 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📊 Презентации
+2026-03-09 12:51:25,843 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=⬅️ Назад
+2026-03-09 12:51:28,306 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=⬅️ Назад
+2026-03-09 12:51:55,680 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=/admin
+2026-03-09 12:54:53,416 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=/admin
+2026-03-09 12:55:14,645 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=/start
+2026-03-09 12:55:23,253 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📚 Каталог нейросетей
+2026-03-09 12:55:27,409 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=⬅️ Назад
+2026-03-09 13:29:36,792 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=/start
+2026-03-09 13:29:39,678 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📊 Профиль
+2026-03-09 13:29:53,002 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📚 Каталог нейросетей
+2026-03-09 13:30:05,723 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=⭐ Избранное
+2026-03-09 13:30:10,793 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=🖼 Генерация изображений
+2026-03-09 13:30:34,092 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:fav_midjourney
+2026-03-09 13:30:57,813 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=⬅️ Назад
+2026-03-09 13:31:01,890 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=⬅️ Назад
+2026-03-09 13:31:06,691 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📚 Каталог нейросетей
+2026-03-09 13:31:08,253 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=⭐ Избранное
+2026-03-09 13:31:24,873 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📊 Презентации
+2026-03-09 13:31:38,630 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=⬅️ Назад
+2026-03-09 13:31:49,132 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=⬅️ Назад
+2026-03-09 13:41:58,016 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🛠 Админ-панель
+2026-03-09 13:42:00,053 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/stats
+2026-03-09 13:42:02,606 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/broadcast
+2026-03-09 13:42:04,133 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/cancel
+2026-03-09 13:42:08,726 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-09 13:42:15,960 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=⭐ Избранное
+2026-03-09 13:42:18,768 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=⬅️ Назад
+2026-03-09 13:42:20,507 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-09 13:42:22,870 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=💻 Программирование
+2026-03-09 13:43:28,614 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fav_github_copilot
+2026-03-09 13:43:45,075 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=⬅️ Назад
+2026-03-09 13:43:48,224 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=⭐ Избранное
+2026-03-09 13:43:51,382 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=⬅️ Назад
+2026-03-09 13:52:00,928 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-09 14:41:54,018 | INFO | USER_ACTION user_id=1699893856 username=Meeoww223 name=Meow action=📊 Профиль
+2026-03-09 14:42:45,281 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📚 Каталог нейросетей
+2026-03-09 14:43:10,603 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=⭐ Избранное
+2026-03-09 14:43:14,090 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=⬅️ Назад
+2026-03-09 14:43:21,453 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📚 Каталог нейросетей
+2026-03-09 14:46:57,232 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=/start
+2026-03-09 14:46:59,540 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📚 Каталог нейросетей
+2026-03-09 14:47:06,785 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_images
+2026-03-09 14:47:11,287 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_menu
+2026-03-09 14:47:23,185 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_favorites
+2026-03-09 14:47:39,698 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_menu
+2026-03-09 14:47:49,339 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📊 Профиль
+2026-03-09 14:50:40,353 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📚 Каталог нейросетей
+2026-03-09 14:50:46,709 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_gaming
+2026-03-09 14:50:50,887 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:fav_gemini
+2026-03-09 14:50:54,021 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_menu
+2026-03-09 14:51:01,207 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_favorites
+2026-03-09 14:56:03,257 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📚 Каталог нейросетей
+2026-03-09 14:56:06,045 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_favorites
+2026-03-09 14:56:14,935 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:rem_midjourney
+2026-03-09 14:56:19,569 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_menu
+2026-03-09 14:56:23,224 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_programming
+2026-03-09 14:56:29,782 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:fav_github_copilot
+2026-03-09 14:56:51,422 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_menu
+2026-03-09 14:56:53,419 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_favorites
+2026-03-09 14:57:03,129 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:rem_github_copilot
+2026-03-09 14:57:07,436 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:rem_gemini
+2026-03-09 14:57:12,882 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_back
+2026-03-09 17:38:40,436 | INFO | USER_ACTION user_id=1699893856 username=Meeoww223 name=Meow action=ℹ️ Помощь
+2026-03-09 17:38:47,158 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=/start
+2026-03-09 17:38:57,231 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:check_subscription
+2026-03-09 17:39:09,189 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:check_subscription
+2026-03-09 17:39:14,031 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📚 Каталог нейросетей
+2026-03-09 17:39:18,301 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_images
+2026-03-09 17:39:29,838 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_menu
+2026-03-09 17:39:32,640 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_favorites
+2026-03-09 17:39:37,210 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:fav_leonardo
+2026-03-09 17:39:39,375 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_favorites
+2026-03-09 17:39:42,504 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:rem_leonardo
+2026-03-09 17:39:45,307 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_gaming
+2026-03-09 17:39:52,618 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_menu
+2026-03-09 17:40:08,734 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_programming
+2026-03-09 17:40:28,387 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_menu
+2026-03-09 17:40:31,697 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_presentations
+2026-03-09 17:40:39,795 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_menu
+2026-03-09 17:40:43,615 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_back
+2026-03-09 17:41:52,209 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/start
+2026-03-09 17:42:06,441 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🛠 Админ-панель
+2026-03-09 17:42:13,363 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/broadcast
+2026-03-09 17:42:20,565 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/cancel
+2026-03-09 17:42:24,256 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/stats
+2026-03-09 17:47:28,277 | INFO | USER_ACTION user_id=1699893856 username=Meeoww223 name=Meow action=/start
+2026-03-09 17:47:49,246 | INFO | USER_ACTION user_id=1699893856 username=Meeoww223 name=Meow action=📚 Каталог нейросетей
+2026-03-09 18:02:36,802 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=📚 Каталог нейросетей
+2026-03-09 18:02:38,995 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_images
+2026-03-09 18:02:43,458 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:pg:images:1
+2026-03-09 18:02:51,035 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_menu
+2026-03-09 18:02:53,219 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_programming
+2026-03-09 18:02:55,640 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:pg:programming:1
+2026-03-09 18:02:59,443 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:pg:programming:0
+2026-03-09 18:03:02,877 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:fav_chatgpt
+2026-03-09 18:03:07,503 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_menu
+2026-03-09 18:03:18,775 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_favorites
+2026-03-09 18:03:22,672 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:rem_chatgpt
+2026-03-09 18:03:33,739 | INFO | USER_ACTION user_id=8233878613 username=patissobad name=Pat action=callback:cat_back
+2026-03-09 18:04:35,448 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-09 18:04:39,049 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_programming
+2026-03-09 18:04:43,418 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:programming:1
+2026-03-09 18:05:01,605 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:programming:0
+2026-03-09 18:05:06,026 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-09 18:05:07,681 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_favorites
+2026-03-09 18:05:12,118 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:rem_github_copilot
+2026-03-09 18:05:16,835 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_back
