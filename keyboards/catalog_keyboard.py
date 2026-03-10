@@ -18,6 +18,5 @@ def get_catalog_keyboard() -> InlineKeyboardMarkup:
         )
 
     keyboard.append([InlineKeyboardButton(text="⭐ Избранное", callback_data="cat_favorites")])
-    keyboard.append([InlineKeyboardButton(text="⬅️ Назад", callback_data="cat_back")])
 
     return InlineKeyboardMarkup(inline_keyboard=keyboard)

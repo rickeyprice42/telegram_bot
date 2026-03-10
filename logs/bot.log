@@ -137,3 +137,221 @@
 2026-03-09 18:05:07,681 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_favorites
 2026-03-09 18:05:12,118 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:rem_github_copilot
 2026-03-09 18:05:16,835 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_back
+2026-03-09 18:32:09,059 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/start
+2026-03-09 18:32:12,078 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-09 18:32:17,511 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_programming
+2026-03-09 18:32:19,445 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:programming:1
+2026-03-09 18:32:23,370 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fav_github_copilot
+2026-03-09 18:32:26,530 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:programming:0
+2026-03-09 18:32:28,213 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:programming:1
+2026-03-09 18:32:32,035 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:rem_github_copilot
+2026-03-09 18:32:35,975 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📊 Профиль
+2026-03-09 18:32:38,612 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🛠 Админ-панель
+2026-03-09 18:32:41,969 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/stats
+2026-03-09 18:33:30,544 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=/start
+2026-03-09 18:33:57,194 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:check_subscription
+2026-03-09 18:34:02,121 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=📊 Профиль
+2026-03-09 18:34:05,566 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=📚 Каталог нейросетей
+2026-03-09 18:34:11,040 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:cat_images
+2026-03-09 18:34:15,527 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:pg:images:1
+2026-03-09 18:34:24,818 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:cat_menu
+2026-03-09 18:34:27,396 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:cat_gaming
+2026-03-09 18:34:31,674 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:fav_gemini
+2026-03-09 18:34:33,322 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:cat_menu
+2026-03-09 18:34:34,505 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:cat_favorites
+2026-03-09 18:34:37,543 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:cat_menu
+2026-03-09 18:34:39,270 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:cat_presentations
+2026-03-09 18:34:42,347 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:fav_gamma
+2026-03-09 18:34:43,554 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:cat_menu
+2026-03-09 18:34:44,663 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:cat_favorites
+2026-03-09 18:34:46,991 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:rem_gemini
+2026-03-09 18:34:52,273 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:rem_gamma
+2026-03-09 18:34:54,955 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:cat_gaming
+2026-03-09 18:34:56,282 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:fav_gemini
+2026-03-09 18:34:57,325 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:cat_menu
+2026-03-09 18:34:58,794 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:cat_presentations
+2026-03-09 18:34:59,888 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:fav_gamma
+2026-03-09 18:35:06,451 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:cat_menu
+2026-03-09 18:35:07,909 | INFO | USER_ACTION user_id=767950559 username=DavayP0zhenimsya name=ДавайПоженимся action=callback:cat_favorites
+2026-03-10 20:17:10,225 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-10 20:17:12,357 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_presentations
+2026-03-10 20:17:15,605 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:presentations:0
+2026-03-10 20:17:17,642 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 20:17:19,377 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_images
+2026-03-10 20:17:20,905 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:1
+2026-03-10 20:17:23,318 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:0
+2026-03-10 20:17:35,718 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:1
+2026-03-10 20:17:38,469 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 20:17:40,726 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_favorites
+2026-03-10 20:17:44,115 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fav:leonardo
+2026-03-10 20:17:45,497 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:0
+2026-03-10 20:17:49,022 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fav:midjourney
+2026-03-10 20:17:55,947 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 20:17:57,688 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_favorites
+2026-03-10 20:17:59,663 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fp:__favorites__:1
+2026-03-10 20:18:01,638 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:remf:midjourney:1
+2026-03-10 20:18:04,897 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 20:18:07,389 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_back
+2026-03-10 20:18:10,828 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📊 Профиль
+2026-03-10 20:18:13,003 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🛠 Админ-панель
+2026-03-10 20:22:39,617 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/stats
+2026-03-10 20:22:44,846 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-10 20:22:46,765 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_gaming
+2026-03-10 20:22:48,890 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 20:22:52,610 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_favorites
+2026-03-10 20:22:55,804 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:remf:leonardo:0
+2026-03-10 20:28:28,903 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-10 20:28:34,880 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_images
+2026-03-10 20:28:36,060 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:1
+2026-03-10 20:28:37,662 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:0
+2026-03-10 20:28:39,258 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 20:28:45,860 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fav:midjourney
+2026-03-10 20:28:48,441 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_favorites
+2026-03-10 20:28:50,325 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:remf:midjourney:0
+2026-03-10 20:38:15,232 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-10 20:38:19,154 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_images
+2026-03-10 20:38:21,083 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:1
+2026-03-10 20:38:24,100 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fav:leonardo
+2026-03-10 20:38:28,249 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:0
+2026-03-10 20:38:29,430 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:1
+2026-03-10 20:38:36,019 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 20:38:39,701 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_favorites
+2026-03-10 20:38:41,765 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:remf:leonardo:0
+2026-03-10 20:38:46,205 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:rem:leonardo
+2026-03-10 20:38:51,607 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_images
+2026-03-10 20:38:53,157 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:1
+2026-03-10 20:38:55,931 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fav:leonardo
+2026-03-10 20:38:59,294 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:rem:leonardo
+2026-03-10 20:39:03,072 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 21:39:03,209 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/start
+2026-03-10 21:39:40,208 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-10 21:39:44,289 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_presentations
+2026-03-10 21:39:46,952 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fav:gamma
+2026-03-10 21:39:49,287 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:rem:gamma
+2026-03-10 21:39:51,480 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 21:48:52,936 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_images
+2026-03-10 21:48:54,875 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:1
+2026-03-10 21:48:57,724 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:0
+2026-03-10 21:49:38,734 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fav:midjourney
+2026-03-10 21:49:39,774 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:1
+2026-03-10 21:49:40,932 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:0
+2026-03-10 21:49:46,730 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:rem:midjourney
+2026-03-10 21:49:52,716 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fav:midjourney
+2026-03-10 21:49:54,088 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 21:49:55,666 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_gaming
+2026-03-10 21:49:57,238 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fav:gemini
+2026-03-10 21:49:58,350 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 21:49:59,788 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_favorites
+2026-03-10 21:50:06,565 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fp:__favorites__:1
+2026-03-10 21:50:08,777 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:remf:gemini:1
+2026-03-10 21:50:11,035 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:remf:midjourney:0
+2026-03-10 21:51:07,557 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_programming
+2026-03-10 21:51:09,321 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 21:53:25,851 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_images
+2026-03-10 21:53:31,422 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:1
+2026-03-10 21:53:34,311 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 21:54:40,810 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_images
+2026-03-10 21:54:42,909 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:1
+2026-03-10 21:54:46,558 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 21:54:50,007 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_favorites
+2026-03-10 21:54:53,079 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fav:leonardo
+2026-03-10 21:55:04,288 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:0
+2026-03-10 21:55:08,632 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:1
+2026-03-10 21:55:09,908 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:0
+2026-03-10 21:55:11,218 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fav:midjourney
+2026-03-10 21:55:12,390 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 21:55:13,950 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_favorites
+2026-03-10 21:55:15,983 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fp:__favorites__:1
+2026-03-10 21:55:17,701 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 22:00:14,165 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-10 22:00:17,735 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_images
+2026-03-10 22:00:19,210 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:1
+2026-03-10 22:00:20,614 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 22:00:30,712 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_favorites
+2026-03-10 22:00:32,299 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fp:__favorites__:1
+2026-03-10 22:00:33,537 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 22:01:47,752 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-10 22:01:50,735 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_images
+2026-03-10 22:01:52,066 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:1
+2026-03-10 22:01:55,768 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 22:02:02,057 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_presentations
+2026-03-10 22:02:03,453 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:presentations:0
+2026-03-10 22:02:04,653 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 22:47:30,221 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-10 22:47:31,652 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_images
+2026-03-10 22:47:33,506 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:1
+2026-03-10 22:47:36,319 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 22:47:39,579 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_gaming
+2026-03-10 22:47:41,447 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fav:gemini
+2026-03-10 22:47:42,867 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 22:47:43,965 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_favorites
+2026-03-10 22:47:45,272 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fp:__favorites__:1
+2026-03-10 22:47:46,389 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fp:__favorites__:2
+2026-03-10 22:47:49,947 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 23:21:50,486 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📊 Профиль
+2026-03-10 23:22:49,712 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📊 Профиль
+2026-03-10 23:22:51,332 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-10 23:22:52,672 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_images
+2026-03-10 23:22:53,873 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:1
+2026-03-10 23:22:55,289 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:0
+2026-03-10 23:22:56,782 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 23:22:58,597 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_programming
+2026-03-10 23:22:59,671 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:programming:1
+2026-03-10 23:23:00,764 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:programming:0
+2026-03-10 23:23:01,805 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:programming:1
+2026-03-10 23:23:03,273 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fav:github_copilot
+2026-03-10 23:23:04,558 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 23:23:06,289 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_presentations
+2026-03-10 23:23:07,693 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fav:gamma
+2026-03-10 23:23:10,172 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 23:23:11,263 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_favorites
+2026-03-10 23:23:15,928 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:remf:leonardo:0
+2026-03-10 23:23:18,574 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:remf:midjourney:0
+2026-03-10 23:23:39,651 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fp:__favorites__:1
+2026-03-10 23:23:41,104 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 23:23:54,805 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-10 23:23:55,628 | INFO | USER_ACTION user_id=1699893856 username=Meeoww223 name=Meow action=📚 Каталог нейросетей
+2026-03-10 23:24:26,561 | INFO | USER_ACTION user_id=1699893856 username=Meeoww223 name=Meow action=📊 Профиль
+2026-03-10 23:24:35,048 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📊 Профиль
+2026-03-10 23:25:37,518 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-10 23:25:39,809 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_images
+2026-03-10 23:25:40,461 | INFO | USER_ACTION user_id=1699893856 username=Meeoww223 name=Meow action=📚 Каталог нейросетей
+2026-03-10 23:25:43,189 | INFO | USER_ACTION user_id=1699893856 username=Meeoww223 name=Meow action=callback:cat_images
+2026-03-10 23:25:43,479 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:1
+2026-03-10 23:25:45,930 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fav:leonardo
+2026-03-10 23:25:52,223 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:0
+2026-03-10 23:25:53,868 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 23:25:57,075 | INFO | USER_ACTION user_id=1699893856 username=Meeoww223 name=Meow action=callback:pg:images:1
+2026-03-10 23:25:57,322 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_images
+2026-03-10 23:25:59,289 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:1
+2026-03-10 23:26:04,844 | INFO | USER_ACTION user_id=1699893856 username=Meeoww223 name=Meow action=callback:pg:images:0
+2026-03-10 23:26:08,737 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:0
+2026-03-10 23:26:10,644 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 23:26:12,042 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_programming
+2026-03-10 23:26:13,844 | INFO | USER_ACTION user_id=1699893856 username=Meeoww223 name=Meow action=callback:cat_menu
+2026-03-10 23:26:18,072 | INFO | USER_ACTION user_id=1699893856 username=Meeoww223 name=Meow action=callback:cat_programming
+2026-03-10 23:26:22,102 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 23:26:24,030 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_programming
+2026-03-10 23:26:25,487 | INFO | USER_ACTION user_id=1699893856 username=Meeoww223 name=Meow action=callback:pg:programming:1
+2026-03-10 23:26:25,670 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:programming:1
+2026-03-10 23:26:30,925 | INFO | USER_ACTION user_id=1699893856 username=Meeoww223 name=Meow action=callback:cat_menu
+2026-03-10 23:26:31,793 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 23:26:33,891 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_presentations
+2026-03-10 23:26:34,304 | INFO | USER_ACTION user_id=1699893856 username=Meeoww223 name=Meow action=callback:cat_presentations
+2026-03-10 23:26:50,373 | INFO | USER_ACTION user_id=1699893856 username=Meeoww223 name=Meow action=callback:pg:presentations:0
+2026-03-10 23:26:52,862 | INFO | USER_ACTION user_id=1699893856 username=Meeoww223 name=Meow action=callback:cat_menu
+2026-03-10 23:26:54,675 | INFO | USER_ACTION user_id=1699893856 username=Meeoww223 name=Meow action=callback:cat_gaming
+2026-03-10 23:26:55,268 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 23:26:57,441 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_gaming
+2026-03-10 23:27:02,763 | INFO | USER_ACTION user_id=1699893856 username=Meeoww223 name=Meow action=callback:cat_menu
+2026-03-10 23:27:03,730 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-10 23:27:04,276 | INFO | USER_ACTION user_id=1699893856 username=Meeoww223 name=Meow action=callback:cat_favorites
+2026-03-10 23:27:05,860 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_favorites
+2026-03-10 23:27:10,122 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:remf:gemini:0
+2026-03-10 23:27:11,771 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:remf:github_copilot:0
+2026-03-10 23:27:12,791 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:remf:gamma:0
+2026-03-10 23:27:14,150 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:remf:leonardo:0
+2026-03-10 23:28:16,225 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🛠 Админ-панель
+2026-03-10 23:29:17,564 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/broadcast
+2026-03-10 23:29:20,273 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/cancel
+2026-03-10 23:29:37,899 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/stats

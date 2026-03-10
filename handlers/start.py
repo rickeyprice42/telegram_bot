@@ -49,9 +49,24 @@ async def cmd_start(message: Message, bot: Bot):
         return
 
     await message.answer(
-        f"Привет, {message.from_user.first_name}!",
-        reply_markup=get_main_menu(message.from_user.id),
-    )
+    f"""🚀 Привет, {message.from_user.first_name}! Добро пожаловать в <b>Neural Hub Bot</b>!
+
+Это каталог лучших нейросетей и AI-инструментов для работы, учебы и творчества.
+
+📚 <b>В боте вы найдете:</b>
+• Каталог нейросетей по категориям
+• Возможность сохранять AI в избранное
+• Подбор нейросети под вашу задачу
+• 🔥 Лучшие AI инструменты
+• Полезные гайды и промпты
+
+🤖 Neural Hub помогает быстро находить нужные AI-инструменты без долгих поисков в интернете.
+
+Выберите нужный раздел в меню ниже и начните исследовать мир нейросетей.
+""",
+    parse_mode="HTML",
+    reply_markup=get_main_menu(message.from_user.id)
+)
 
 
 @router.callback_query(F.data == "check_subscription")

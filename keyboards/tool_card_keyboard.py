@@ -8,11 +8,17 @@ def get_tool_keyboard(
     category_key: str | None = None,
     page_index: int | None = None,
     total_pages: int | None = None,
+    pager_prefix: str = "pg",
 ) -> InlineKeyboardMarkup:
+    if in_favorites and page_index is not None and pager_prefix == "fp":
+        remove_callback = f"remf:{tool_id}:{page_index}"
+    else:
+        remove_callback = f"rem:{tool_id}"
+
     second_button = (
-        InlineKeyboardButton(text="❌ Удалить из избранного", callback_data=f"rem_{tool_id}")
+        InlineKeyboardButton(text="❌ Удалить из избранного", callback_data=remove_callback)
         if in_favorites
-        else InlineKeyboardButton(text="⭐ В избранное", callback_data=f"fav_{tool_id}")
+        else InlineKeyboardButton(text="⭐ В избранное", callback_data=f"fav:{tool_id}")
     )
 
     keyboard = [
@@ -27,15 +33,15 @@ def get_tool_keyboard(
             [
                 InlineKeyboardButton(
                     text="⬅️",
-                    callback_data=f"pg:{category_key}:{prev_index}",
+                    callback_data=f"{pager_prefix}:{category_key}:{prev_index}",
                 ),
                 InlineKeyboardButton(
                     text=f"{page_index + 1}/{total_pages}",
-                    callback_data="pg:noop",
+                    callback_data=f"{pager_prefix}:noop",
                 ),
                 InlineKeyboardButton(
                     text="➡️",
-                    callback_data=f"pg:{category_key}:{next_index}",
+                    callback_data=f"{pager_prefix}:{category_key}:{next_index}",
                 ),
             ]
         )
