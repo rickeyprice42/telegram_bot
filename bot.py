@@ -17,6 +17,7 @@ from middlewares.subscription import SubscriptionMiddleware
 from middlewares.antiflood import AntiFloodMiddleware
 from utils.logger import LoggingMiddleware, setup_logger
 from handlers.catalog_handler import router as catalog_router
+from handlers.top_ai import router as top_ai_router
 
 async def main():
     setup_logger()
@@ -43,6 +44,7 @@ async def main():
     dp.include_router(menu_router)
     dp.include_router(admin_router)
     dp.include_router(catalog_router)
+    dp.include_router(top_ai_router)
 
     await dp.start_polling(bot)
 

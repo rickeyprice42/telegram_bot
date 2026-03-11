@@ -59,6 +59,124 @@ def seed_catalog_from_json(cursor):
                 ),
             )
 
+def add_tool(tool_id, category_key, name, description, link, image=None):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        INSERT INTO tools (
+            tool_id,
+            category_key,
+            name,
+            description,
+            link,
+            image
+        )
+        VALUES (?, ?, ?, ?, ?, ?)
+    """, (
+        tool_id,
+        category_key,
+        name,
+        description,
+        link,
+        image
+    ))
+
+    conn.commit()
+    conn.close()
+
+
+def delete_tool(tool_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT name FROM tools WHERE tool_id = ?",
+        (tool_id,)
+    )
+    row = cursor.fetchone()
+    if not row:
+        conn.close()
+        return None
+
+    cursor.execute(
+        "DELETE FROM favorites WHERE tool_id = ?",
+        (tool_id,)
+    )
+    cursor.execute(
+        "DELETE FROM tools WHERE tool_id = ?",
+        (tool_id,)
+    )
+
+    conn.commit()
+    conn.close()
+    return row["name"]
+
+def get_top_tools_by_category(category_key):
+    query = """
+    SELECT 
+        t.tool_id,
+        t.name,
+        COUNT(f.tool_id) AS favorites_count,
+        COALESCE(r.rating, 0) AS external_rating,
+        (COUNT(f.tool_id) * 2 + COALESCE(r.rating, 0)) AS score
+    FROM tools t
+    LEFT JOIN favorites f ON t.tool_id = f.tool_id
+    LEFT JOIN tool_ratings r ON t.tool_id = r.tool_id
+    WHERE t.category_key = ?
+    GROUP BY t.tool_id
+    ORDER BY score DESC
+    LIMIT 3
+    """
+
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(query, (category_key,))
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
+
+def get_categories():
+    query = "SELECT category_key, title FROM categories ORDER BY sort_order"
+
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(query)
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
+
+
+def get_all_tools():
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        SELECT tool_id, category_key, name
+        FROM tools
+        ORDER BY category_key, sort_order, name
+        """
+    )
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
+
+
+def save_tool_rating(tool_id, rating):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        INSERT INTO tool_ratings (tool_id, rating, updated_at)
+        VALUES (?, ?, CURRENT_TIMESTAMP)
+        ON CONFLICT(tool_id) DO UPDATE SET
+            rating = excluded.rating,
+            updated_at = CURRENT_TIMESTAMP
+        """,
+        (tool_id, rating),
+    )
+    conn.commit()
+    conn.close()
 
 def init_db():
     conn = get_connection()
@@ -102,6 +220,14 @@ def init_db():
         image TEXT,
         sort_order INTEGER DEFAULT 0,
         FOREIGN KEY (category_key) REFERENCES categories(category_key)
+    )
+    """)
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS tool_ratings (
+        tool_id TEXT PRIMARY KEY,
+        rating REAL DEFAULT 0,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
     """)
 
