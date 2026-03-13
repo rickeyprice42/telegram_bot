@@ -188,9 +188,15 @@ def init_db():
         user_id INTEGER UNIQUE,
         username TEXT,
         first_name TEXT,
+        banned INTEGER DEFAULT 0,
         date_joined TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
     """)
+
+    cursor.execute("PRAGMA table_info(users)")
+    user_columns = {row["name"] for row in cursor.fetchall()}
+    if "banned" not in user_columns:
+        cursor.execute("ALTER TABLE users ADD COLUMN banned INTEGER DEFAULT 0")
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS favorites (
@@ -230,6 +236,38 @@ def init_db():
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
     """)
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS use_cases (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    case_key TEXT UNIQUE,
+    title TEXT,
+    emoji TEXT
+    )
+    """)
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS tool_use_cases (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tool_id TEXT,
+    case_key TEXT
+    )
+    """)
+
+    cursor.execute("SELECT COUNT(*) FROM use_cases")
+    count = cursor.fetchone()[0]
+
+    if count == 0:
+        cursor.executemany(
+        "INSERT INTO use_cases (case_key, title, emoji) VALUES (?, ?, ?)",
+        [
+            ("text", "Написать текст", "📝"),
+            ("image", "Создать изображение", "🎨"),
+            ("video", "Создать видео", "🎬"),
+            ("code", "Написать код", "💻"),
+            ("data", "Анализировать данные", "📊"),
+        ]
+    )
 
     cursor.execute("SELECT COUNT(*) FROM categories")
     categories_count = cursor.fetchone()[0]

@@ -18,6 +18,7 @@ from middlewares.antiflood import AntiFloodMiddleware
 from utils.logger import LoggingMiddleware, setup_logger
 from handlers.catalog_handler import router as catalog_router
 from handlers.top_ai import router as top_ai_router
+from handlers.ai_picker import router as ai_picker_router
 
 async def main():
     setup_logger()
@@ -34,6 +35,7 @@ async def main():
     dp = Dispatcher(storage=storage)
 
     dp.message.middleware(UserRegistrationMiddleware())
+    dp.callback_query.middleware(UserRegistrationMiddleware())
     dp.message.middleware(SubscriptionMiddleware())
     dp.message.middleware(AntiFloodMiddleware())
     dp.callback_query.middleware(AntiFloodMiddleware())
@@ -45,6 +47,7 @@ async def main():
     dp.include_router(admin_router)
     dp.include_router(catalog_router)
     dp.include_router(top_ai_router)
+    dp.include_router(ai_picker_router)
 
     await dp.start_polling(bot)
 

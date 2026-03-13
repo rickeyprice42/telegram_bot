@@ -7,9 +7,9 @@ from aiogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMar
 
 from config import ADMIN_IDS
 from database.database import add_tool, delete_tool, get_all_tools, save_tool_rating
-from database.models import get_all_users, get_users_count
+from database.models import ban_user, get_all_users, get_users_count, unban_user
 from keyboards.catalog_keyboard import get_catalog_keyboard
-from states.admin_states import AddTool, RatingState
+from states.admin_states import AddTool, RatingState, UserModerationState
 from states.broadcast_state import BroadcastState
 from states.catalog_states import CatalogStates
 from utils.ai_catalog import get_categories
@@ -33,6 +33,10 @@ def get_admin_keyboard() -> InlineKeyboardMarkup:
                 InlineKeyboardButton(text="📢 Рассылка", callback_data="admin_broadcast"),
                 InlineKeyboardButton(text="⭐ Обновить рейтинг AI", callback_data="admin_update_rating"),
             ],
+            [
+                InlineKeyboardButton(text="⛔ Бан", callback_data="admin_ban_user"),
+                InlineKeyboardButton(text="✅ Разбан", callback_data="admin_unban_user"),
+            ],
         ]
     )
 
@@ -54,6 +58,14 @@ def get_broadcast_cancel_keyboard() -> InlineKeyboardMarkup:
 
 
 def get_rating_back_keyboard() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [InlineKeyboardButton(text="⬅️ Назад в админ-панель", callback_data="admin_panel")]
+        ]
+    )
+
+
+def get_user_moderation_back_keyboard() -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(
         inline_keyboard=[
             [InlineKeyboardButton(text="⬅️ Назад в админ-панель", callback_data="admin_panel")]
@@ -311,6 +323,36 @@ async def choose_tool_for_rating(callback: CallbackQuery):
     await callback.answer()
 
 
+@router.callback_query(F.data == "admin_ban_user")
+async def admin_ban_user_callback(callback: CallbackQuery, state: FSMContext):
+    if not is_admin(callback.from_user.id):
+        await callback.answer("Нет доступа", show_alert=True)
+        return
+
+    await state.update_data(moderation_action="ban")
+    await callback.message.edit_text(
+        "Введите ID пользователя для бана:",
+        reply_markup=get_user_moderation_back_keyboard(),
+    )
+    await state.set_state(UserModerationState.waiting_for_user_id)
+    await callback.answer()
+
+
+@router.callback_query(F.data == "admin_unban_user")
+async def admin_unban_user_callback(callback: CallbackQuery, state: FSMContext):
+    if not is_admin(callback.from_user.id):
+        await callback.answer("Нет доступа", show_alert=True)
+        return
+
+    await state.update_data(moderation_action="unban")
+    await callback.message.edit_text(
+        "Введите ID пользователя для разбана:",
+        reply_markup=get_user_moderation_back_keyboard(),
+    )
+    await state.set_state(UserModerationState.waiting_for_user_id)
+    await callback.answer()
+
+
 @router.callback_query(F.data.startswith("rating_tool:"))
 async def select_tool_for_rating(callback: CallbackQuery, state: FSMContext):
     if not is_admin(callback.from_user.id):
@@ -356,6 +398,30 @@ async def save_rating(message: Message, state: FSMContext):
 
     save_tool_rating(tool_id, rating)
     await message.answer("⭐ Рейтинг обновлен", reply_markup=get_admin_keyboard())
+    await state.clear()
+
+
+@router.message(UserModerationState.waiting_for_user_id)
+async def process_user_moderation(message: Message, state: FSMContext):
+    try:
+        user_id = int(message.text)
+    except ValueError:
+        await message.answer("Введите корректный числовой ID пользователя.")
+        return
+
+    data = await state.get_data()
+    action = data.get("moderation_action")
+
+    if action == "ban":
+        updated = ban_user(user_id)
+        result_text = "Пользователь забанен." if updated else "Пользователь не найден."
+    elif action == "unban":
+        updated = unban_user(user_id)
+        result_text = "Пользователь разбанен." if updated else "Пользователь не найден."
+    else:
+        result_text = "Не удалось определить действие."
+
+    await message.answer(result_text, reply_markup=get_admin_keyboard())
     await state.clear()
 
 

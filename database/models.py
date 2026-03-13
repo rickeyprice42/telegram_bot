@@ -107,6 +107,43 @@ def get_user(user_id):
 
     return user
 
+
+def set_user_ban_status(user_id, banned):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "UPDATE users SET banned = ? WHERE user_id = ?",
+        (1 if banned else 0, user_id),
+    )
+
+    updated = cursor.rowcount > 0
+    conn.commit()
+    conn.close()
+    return updated
+
+
+def ban_user(user_id):
+    return set_user_ban_status(user_id, True)
+
+
+def unban_user(user_id):
+    return set_user_ban_status(user_id, False)
+
+
+def is_user_banned(user_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT banned FROM users WHERE user_id = ?",
+        (user_id,),
+    )
+    row = cursor.fetchone()
+    conn.close()
+
+    return bool(row["banned"]) if row else False
+
 def get_users_count():
     conn = get_connection()
     cursor = conn.cursor()

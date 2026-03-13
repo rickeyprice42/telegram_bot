@@ -11,3 +11,7 @@ class AddTool(StatesGroup):
 
 class RatingState(StatesGroup):
     waiting_for_rating = State()
+
+
+class UserModerationState(StatesGroup):
+    waiting_for_user_id = State()
