@@ -1,5 +1,7 @@
 import sqlite3
 import json
+import re
+import unicodedata
 from pathlib import Path
 
 DB_PATH = Path("database/bot.db")
@@ -86,6 +88,67 @@ def add_tool(tool_id, category_key, name, description, link, image=None):
     conn.close()
 
 
+def tool_exists(tool_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        "SELECT 1 FROM tools WHERE tool_id = ?",
+        (tool_id,),
+    )
+    exists = cursor.fetchone() is not None
+    conn.close()
+    return exists
+
+
+def make_tool_id(name):
+    normalized = unicodedata.normalize("NFKD", name or "")
+    ascii_name = normalized.encode("ascii", "ignore").decode("ascii").lower()
+    slug = re.sub(r"[^a-z0-9]+", "-", ascii_name).strip("-")
+    return slug or "tool"
+
+
+def generate_unique_tool_id(name):
+    base_tool_id = make_tool_id(name)
+    tool_id = base_tool_id
+    suffix = 2
+
+    while tool_exists(tool_id):
+        tool_id = f"{base_tool_id}-{suffix}"
+        suffix += 1
+
+    return tool_id
+
+def get_use_cases():
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        SELECT case_key, title, emoji
+        FROM use_cases
+        ORDER BY id
+        """
+    )
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
+
+def save_tool_use_cases(tool_id, case_keys):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("DELETE FROM tool_use_cases WHERE tool_id = ?", (tool_id,))
+    cursor.executemany(
+        """
+        INSERT OR IGNORE INTO tool_use_cases (tool_id, case_key)
+        VALUES (?, ?)
+        """,
+        [(tool_id, case_key) for case_key in case_keys],
+    )
+
+    conn.commit()
+    conn.close()
+
+
 def delete_tool(tool_id):
     conn = get_connection()
     cursor = conn.cursor()
@@ -101,6 +164,10 @@ def delete_tool(tool_id):
 
     cursor.execute(
         "DELETE FROM favorites WHERE tool_id = ?",
+        (tool_id,)
+    )
+    cursor.execute(
+        "DELETE FROM tool_use_cases WHERE tool_id = ?",
         (tool_id,)
     )
     cursor.execute(
@@ -160,6 +227,56 @@ def get_all_tools():
     rows = cursor.fetchall()
     conn.close()
     return rows
+
+
+def get_tool_by_id(tool_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        SELECT tool_id, category_key, name, description, link, image
+        FROM tools
+        WHERE tool_id = ?
+        """,
+        (tool_id,),
+    )
+    row = cursor.fetchone()
+    conn.close()
+    return row
+
+
+def get_tool_use_case_keys(tool_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        SELECT case_key
+        FROM tool_use_cases
+        WHERE tool_id = ?
+        ORDER BY case_key
+        """,
+        (tool_id,),
+    )
+    rows = cursor.fetchall()
+    conn.close()
+    return [row["case_key"] for row in rows]
+
+
+def update_tool_field(tool_id, field_name, value):
+    allowed_fields = {"name", "description", "link", "image", "category_key"}
+    if field_name not in allowed_fields:
+        raise ValueError(f"Unsupported field: {field_name}")
+
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        f"UPDATE tools SET {field_name} = ? WHERE tool_id = ?",
+        (value, tool_id),
+    )
+    conn.commit()
+    updated = cursor.rowcount > 0
+    conn.close()
+    return updated
 
 
 def save_tool_rating(tool_id, rating):
@@ -253,6 +370,12 @@ def init_db():
     case_key TEXT
     )
     """)
+    cursor.execute(
+        """
+        CREATE UNIQUE INDEX IF NOT EXISTS idx_tool_use_cases_tool_case
+        ON tool_use_cases (tool_id, case_key)
+        """
+    )
 
     cursor.execute("SELECT COUNT(*) FROM use_cases")
     count = cursor.fetchone()[0]

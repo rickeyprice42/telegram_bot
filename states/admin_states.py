@@ -7,6 +7,7 @@ class AddTool(StatesGroup):
     link = State()
     category = State()
     image = State()
+    use_cases = State()
 
 
 class RatingState(StatesGroup):

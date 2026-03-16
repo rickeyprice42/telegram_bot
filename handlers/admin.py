@@ -6,15 +6,43 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup, Message
 
 from config import ADMIN_IDS
-from database.database import add_tool, delete_tool, get_all_tools, save_tool_rating
+from database.database import (
+    add_tool,
+    delete_tool,
+    generate_unique_tool_id,
+    get_all_tools,
+    get_tool_by_id,
+    get_tool_use_case_keys,
+    get_use_cases,
+    save_tool_rating,
+    save_tool_use_cases,
+    update_tool_field,
+)
 from database.models import ban_user, get_all_users, get_users_count, unban_user
 from keyboards.catalog_keyboard import get_catalog_keyboard
 from states.admin_states import AddTool, RatingState, UserModerationState
 from states.broadcast_state import BroadcastState
 from states.catalog_states import CatalogStates
 from utils.ai_catalog import get_categories
+from states.edit_tool_states import EditTool
 
 router = Router()
+
+
+def get_use_cases_prompt() -> str:
+    use_cases = get_use_cases()
+    lines = [
+        "Введите ключи задач через запятую.",
+        "Если задачи пока не нужны, отправьте `-`.",
+        "",
+        "Доступные задачи:",
+    ]
+
+    for case_key, title, emoji in use_cases:
+        prefix = f"{emoji} " if emoji else ""
+        lines.append(f"- {case_key} — {prefix}{title}")
+
+    return "\n".join(lines)
 
 
 def is_admin(user_id: int) -> bool:
@@ -28,7 +56,10 @@ def get_admin_keyboard() -> InlineKeyboardMarkup:
                 InlineKeyboardButton(text="📊 Статистика", callback_data="admin_stats"),
                 InlineKeyboardButton(text="❌ Удалить нейросеть", callback_data="admin_delete_tool"),
             ],
-            [InlineKeyboardButton(text="➕ Добавить нейросеть", callback_data="admin_add_tool")],
+            [
+                InlineKeyboardButton(text="➕ Добавить нейросеть", callback_data="admin_add_tool"),
+                InlineKeyboardButton(text="✏ Редактировать нейросеть", callback_data="admin_edit_tool")
+            ],
             [
                 InlineKeyboardButton(text="📢 Рассылка", callback_data="admin_broadcast"),
                 InlineKeyboardButton(text="⭐ Обновить рейтинг AI", callback_data="admin_update_rating"),
@@ -138,6 +169,59 @@ def get_admin_panel_text() -> str:
     )
 
 
+def get_edit_tools_keyboard() -> InlineKeyboardMarkup:
+    tools = get_all_tools()
+    keyboard = []
+
+    for tool in tools:
+        keyboard.append(
+            [
+                InlineKeyboardButton(
+                    text=tool["name"],
+                    callback_data=f"edit_tool:{tool['tool_id']}",
+                )
+            ]
+        )
+
+    keyboard.append([InlineKeyboardButton(text="⬅️ Назад", callback_data="admin_panel")])
+    return InlineKeyboardMarkup(inline_keyboard=keyboard)
+
+
+def get_edit_fields_keyboard() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [InlineKeyboardButton(text="Название", callback_data="edit_field:name")],
+            [InlineKeyboardButton(text="Описание", callback_data="edit_field:description")],
+            [InlineKeyboardButton(text="Ссылка", callback_data="edit_field:link")],
+            [InlineKeyboardButton(text="Изображение", callback_data="edit_field:image")],
+            [InlineKeyboardButton(text="Категория", callback_data="edit_field:category")],
+            [InlineKeyboardButton(text="Рейтинг", callback_data="edit_field:rating")],
+            [InlineKeyboardButton(text="Задачи", callback_data="edit_field:cases")],
+            [InlineKeyboardButton(text="⬅️ К списку", callback_data="admin_edit_tool")],
+        ]
+    )
+
+
+def get_edit_field_prompt(field: str, tool) -> str:
+    prompts = {
+        "name": f"Введите новое название.\n\nСейчас: {tool['name']}",
+        "description": f"Введите новое описание.\n\nСейчас: {tool['description']}",
+        "link": f"Введите новую ссылку.\n\nСейчас: {tool['link']}",
+        "image": (
+            "Введите новую ссылку на изображение или -, чтобы убрать изображение.\n\n"
+            f"Сейчас: {tool['image'] or '-'}"
+        ),
+        "category": f"Введите новый ключ категории.\n\nСейчас: {tool['category_key']}",
+        "rating": "Введите новый рейтинг числом, например 4.8.",
+        "cases": (
+            "Введите ключи задач через запятую или -, чтобы очистить задачи.\n\n"
+            f"Сейчас: {', '.join(get_tool_use_case_keys(tool['tool_id'])) or '-'}\n\n"
+            f"{get_use_cases_prompt()}"
+        ),
+    }
+    return prompts[field]
+
+
 @router.message(Command("admin"))
 async def admin_panel(message: Message):
     if not is_admin(message.from_user.id):
@@ -176,6 +260,129 @@ async def admin_panel_callback(callback: CallbackQuery):
     )
     await callback.answer()
 
+@router.callback_query(F.data == "admin_edit_tool")
+async def edit_tool_start(callback: CallbackQuery, state: FSMContext):
+    if not is_admin(callback.from_user.id):
+        await callback.answer("Нет доступа", show_alert=True)
+        return
+
+    await state.clear()
+    await callback.message.edit_text(
+        "Выберите нейросеть для редактирования:",
+        reply_markup=get_edit_tools_keyboard(),
+    )
+    await state.set_state(EditTool.choose_tool)
+    await callback.answer()
+
+
+@router.callback_query(F.data.startswith("edit_tool:"))
+async def select_tool(callback: CallbackQuery, state: FSMContext):
+    if not is_admin(callback.from_user.id):
+        await callback.answer("Нет доступа", show_alert=True)
+        return
+
+    tool_id = callback.data.replace("edit_tool:", "", 1)
+    tool = get_tool_by_id(tool_id)
+
+    if not tool:
+        await callback.answer("Нейросеть не найдена", show_alert=True)
+        return
+
+    await state.update_data(tool_id=tool_id)
+    await callback.message.edit_text(
+        f"Вы выбрали: {tool['name']}\n\nЧто хотите изменить?",
+        reply_markup=get_edit_fields_keyboard(),
+    )
+    await state.set_state(EditTool.choose_field)
+    await callback.answer()
+
+
+@router.callback_query(F.data.startswith("edit_field:"))
+async def choose_field(callback: CallbackQuery, state: FSMContext):
+    if not is_admin(callback.from_user.id):
+        await callback.answer("Нет доступа", show_alert=True)
+        return
+
+    field = callback.data.replace("edit_field:", "", 1)
+    allowed_fields = {"name", "description", "link", "image", "category", "rating", "cases"}
+    if field not in allowed_fields:
+        await callback.answer("Неизвестное поле для редактирования", show_alert=True)
+        return
+
+    data = await state.get_data()
+    tool_id = data.get("tool_id")
+    tool = get_tool_by_id(tool_id) if tool_id else None
+
+    if not tool:
+        await callback.answer("Сначала выберите нейросеть", show_alert=True)
+        return
+
+    await state.update_data(field=field)
+    await callback.message.edit_text(
+        get_edit_field_prompt(field, tool),
+        reply_markup=get_edit_fields_keyboard(),
+    )
+    await state.set_state(EditTool.new_value)
+    await callback.answer()
+
+
+@router.message(EditTool.new_value)
+async def save_new_value(message: Message, state: FSMContext):
+    data = await state.get_data()
+    tool_id = data.get("tool_id")
+    field = data.get("field")
+
+    if not tool_id or not field:
+        await message.answer("Не удалось определить, что именно редактировать.", reply_markup=get_admin_keyboard())
+        await state.clear()
+        return
+
+    raw_value = (message.text or "").strip()
+
+    if field == "rating":
+        try:
+            rating = float(raw_value)
+        except ValueError:
+            await message.answer("Введите рейтинг числом, например 4.8")
+            return
+
+        save_tool_rating(tool_id, rating)
+    elif field == "cases":
+        case_keys = []
+        if raw_value not in {"", "-", "нет", "Нет", "no", "No"}:
+            case_keys = [item.strip() for item in raw_value.split(",") if item.strip()]
+
+        available_cases = {case["case_key"] for case in get_use_cases()}
+        invalid_case_keys = [case_key for case_key in case_keys if case_key not in available_cases]
+
+        if invalid_case_keys:
+            tool = get_tool_by_id(tool_id)
+            await message.answer(
+                "Не нашёл такие ключи задач: "
+                + ", ".join(invalid_case_keys)
+                + "\n\n"
+                + get_edit_field_prompt("cases", tool),
+                reply_markup=get_edit_fields_keyboard(),
+            )
+            return
+
+        save_tool_use_cases(tool_id, case_keys)
+    else:
+        value = None if field == "image" and raw_value in {"", "-", "нет", "Нет", "no", "No"} else raw_value
+        field_name = "category_key" if field == "category" else field
+        updated = update_tool_field(tool_id, field_name, value)
+
+        if not updated:
+            await message.answer("Не удалось обновить нейросеть.", reply_markup=get_admin_keyboard())
+            await state.clear()
+            return
+
+    tool = get_tool_by_id(tool_id)
+    await message.answer(
+        f"Значение обновлено для {tool['name']}.",
+        reply_markup=get_admin_keyboard(),
+    )
+    await state.clear()
 
 @router.callback_query(F.data == "admin_stats")
 async def admin_stats_callback(callback: CallbackQuery):
@@ -481,18 +688,56 @@ async def add_tool_image(message: Message, state: FSMContext):
 @router.message(AddTool.category)
 async def add_tool_category(message: Message, state: FSMContext):
     await state.update_data(category=message.text)
+    await message.answer(
+        get_use_cases_prompt(),
+        parse_mode="Markdown",
+        reply_markup=get_add_tool_cancel_keyboard(),
+    )
+    await state.set_state(AddTool.use_cases)
+
+
+@router.message(AddTool.use_cases)
+async def add_tool_use_cases_step(message: Message, state: FSMContext):
+    raw_value = (message.text or "").strip()
+    case_keys = []
+
+    if raw_value not in {"", "-", "нет", "Нет", "no", "No"}:
+        case_keys = [item.strip() for item in raw_value.split(",") if item.strip()]
+
+    available_cases = {case["case_key"] for case in get_use_cases()}
+    invalid_case_keys = [case_key for case_key in case_keys if case_key not in available_cases]
+
+    if invalid_case_keys:
+        await message.answer(
+            "Не нашёл такие ключи задач: "
+            + ", ".join(invalid_case_keys)
+            + "\n\n"
+            + get_use_cases_prompt(),
+            parse_mode="Markdown",
+            reply_markup=get_add_tool_cancel_keyboard(),
+        )
+        return
+
     data = await state.get_data()
-    tool_id = data["name"].lower().replace(" ", "_")
+    tool_id = generate_unique_tool_id(data["name"])
 
     add_tool(
         tool_id,
-        message.text,
+        data["category"],
         data["name"],
         data["description"],
         data["link"],
         data.get("image"),
     )
-    await message.answer("Нейросеть добавлена!")
+
+    if case_keys:
+        save_tool_use_cases(tool_id, case_keys)
+
+    await message.answer(
+        f"Нейросеть добавлена!\nID: `{tool_id}`",
+        parse_mode="Markdown",
+        reply_markup=get_admin_keyboard(),
+    )
     await state.clear()
 
 
