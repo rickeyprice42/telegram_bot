@@ -171,6 +171,10 @@ def delete_tool(tool_id):
         (tool_id,)
     )
     cursor.execute(
+        "DELETE FROM tool_categories WHERE tool_id = ?",
+        (tool_id,)
+    )
+    cursor.execute(
         "DELETE FROM tools WHERE tool_id = ?",
         (tool_id,)
     )
@@ -184,13 +188,14 @@ def get_top_tools_by_category(category_key):
     SELECT 
         t.tool_id,
         t.name,
-        COUNT(f.tool_id) AS favorites_count,
+        COUNT(DISTINCT f.user_id) AS favorites_count,
         COALESCE(r.rating, 0) AS external_rating,
-        (COUNT(f.tool_id) * 2 + COALESCE(r.rating, 0)) AS score
+        (COUNT(DISTINCT f.user_id) * 2 + COALESCE(r.rating, 0)) AS score
     FROM tools t
+    JOIN tool_categories tc ON t.tool_id = tc.tool_id
     LEFT JOIN favorites f ON t.tool_id = f.tool_id
     LEFT JOIN tool_ratings r ON t.tool_id = r.tool_id
-    WHERE t.category_key = ?
+    WHERE tc.category_key = ?
     GROUP BY t.tool_id
     ORDER BY score DESC
     LIMIT 3
@@ -214,6 +219,123 @@ def get_categories():
     return rows
 
 
+def category_exists(category_key):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        "SELECT 1 FROM categories WHERE category_key = ?",
+        (category_key,),
+    )
+    exists = cursor.fetchone() is not None
+    conn.close()
+    return exists
+
+
+def add_category(category_key, title):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT COALESCE(MAX(sort_order), -1) + 1 FROM categories")
+    next_sort_order = cursor.fetchone()[0]
+    cursor.execute(
+        """
+        INSERT INTO categories (category_key, title, sort_order)
+        VALUES (?, ?, ?)
+        """,
+        (category_key, title, next_sort_order),
+    )
+    conn.commit()
+    conn.close()
+
+
+def get_tool_category_keys(tool_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        SELECT category_key
+        FROM tool_categories
+        WHERE tool_id = ?
+        ORDER BY id
+        """,
+        (tool_id,),
+    )
+    rows = cursor.fetchall()
+    conn.close()
+    return [row["category_key"] for row in rows]
+
+
+def save_tool_categories(tool_id, category_keys):
+    unique_category_keys = list(dict.fromkeys(category_keys))
+    primary_category = unique_category_keys[0] if unique_category_keys else None
+
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM tool_categories WHERE tool_id = ?", (tool_id,))
+    cursor.executemany(
+        """
+        INSERT OR IGNORE INTO tool_categories (tool_id, category_key)
+        VALUES (?, ?)
+        """,
+        [(tool_id, category_key) for category_key in unique_category_keys],
+    )
+    cursor.execute(
+        """
+        UPDATE tools
+        SET category_key = ?
+        WHERE tool_id = ?
+        """,
+        (primary_category, tool_id),
+    )
+    conn.commit()
+    conn.close()
+
+
+def update_category_title(category_key, title):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        UPDATE categories
+        SET title = ?
+        WHERE category_key = ?
+        """,
+        (title, category_key),
+    )
+    conn.commit()
+    updated = cursor.rowcount > 0
+    conn.close()
+    return updated
+
+
+def count_tools_in_category(category_key):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        "SELECT COUNT(DISTINCT tool_id) FROM tool_categories WHERE category_key = ?",
+        (category_key,),
+    )
+    count = cursor.fetchone()[0]
+    conn.close()
+    return count
+
+
+def delete_category(category_key):
+    tools_count = count_tools_in_category(category_key)
+    if tools_count > 0:
+        return False, tools_count
+
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        "DELETE FROM categories WHERE category_key = ?",
+        (category_key,),
+    )
+    conn.commit()
+    deleted = cursor.rowcount > 0
+    conn.close()
+    return deleted, 0
+
+
 def get_all_tools():
     conn = get_connection()
     cursor = conn.cursor()
@@ -221,7 +343,7 @@ def get_all_tools():
         """
         SELECT tool_id, category_key, name
         FROM tools
-        ORDER BY category_key, sort_order, name
+        ORDER BY name
         """
     )
     rows = cursor.fetchall()
@@ -263,7 +385,7 @@ def get_tool_use_case_keys(tool_id):
 
 
 def update_tool_field(tool_id, field_name, value):
-    allowed_fields = {"name", "description", "link", "image", "category_key"}
+    allowed_fields = {"name", "description", "link", "image"}
     if field_name not in allowed_fields:
         raise ValueError(f"Unsupported field: {field_name}")
 
@@ -370,10 +492,31 @@ def init_db():
     case_key TEXT
     )
     """)
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS tool_categories (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tool_id TEXT,
+    category_key TEXT
+    )
+    """)
     cursor.execute(
         """
         CREATE UNIQUE INDEX IF NOT EXISTS idx_tool_use_cases_tool_case
         ON tool_use_cases (tool_id, case_key)
+        """
+    )
+    cursor.execute(
+        """
+        CREATE UNIQUE INDEX IF NOT EXISTS idx_tool_categories_tool_category
+        ON tool_categories (tool_id, category_key)
+        """
+    )
+    cursor.execute(
+        """
+        INSERT OR IGNORE INTO tool_categories (tool_id, category_key)
+        SELECT tool_id, category_key
+        FROM tools
+        WHERE category_key IS NOT NULL
         """
     )
 

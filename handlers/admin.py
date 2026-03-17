@@ -1,4 +1,5 @@
 import asyncio
+import re
 
 from aiogram import Bot, F, Router
 from aiogram.filters import Command
@@ -7,20 +8,27 @@ from aiogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMar
 
 from config import ADMIN_IDS
 from database.database import (
+    add_category,
     add_tool,
+    category_exists,
+    count_tools_in_category,
+    delete_category,
     delete_tool,
     generate_unique_tool_id,
     get_all_tools,
     get_tool_by_id,
+    get_tool_category_keys,
     get_tool_use_case_keys,
     get_use_cases,
     save_tool_rating,
+    save_tool_categories,
     save_tool_use_cases,
+    update_category_title,
     update_tool_field,
 )
 from database.models import ban_user, get_all_users, get_users_count, unban_user
 from keyboards.catalog_keyboard import get_catalog_keyboard
-from states.admin_states import AddTool, RatingState, UserModerationState
+from states.admin_states import AddTool, CategoryAdminState, RatingState, UserModerationState
 from states.broadcast_state import BroadcastState
 from states.catalog_states import CatalogStates
 from utils.ai_catalog import get_categories
@@ -45,6 +53,20 @@ def get_use_cases_prompt() -> str:
     return "\n".join(lines)
 
 
+def get_category_keys_prompt() -> str:
+    categories = get_categories()
+    lines = [
+        "Введите ключи категорий через запятую.",
+        "",
+        "Доступные категории:",
+    ]
+
+    for category_key, category in categories.items():
+        lines.append(f"- {category_key} — {category['title']}")
+
+    return "\n".join(lines)
+
+
 def is_admin(user_id: int) -> bool:
     return user_id in ADMIN_IDS
 
@@ -60,6 +82,7 @@ def get_admin_keyboard() -> InlineKeyboardMarkup:
                 InlineKeyboardButton(text="➕ Добавить нейросеть", callback_data="admin_add_tool"),
                 InlineKeyboardButton(text="✏ Редактировать нейросеть", callback_data="admin_edit_tool")
             ],
+            [InlineKeyboardButton(text="🗂 Категории каталога", callback_data="admin_manage_categories")],
             [
                 InlineKeyboardButton(text="📢 Рассылка", callback_data="admin_broadcast"),
                 InlineKeyboardButton(text="⭐ Обновить рейтинг AI", callback_data="admin_update_rating"),
@@ -102,6 +125,36 @@ def get_user_moderation_back_keyboard() -> InlineKeyboardMarkup:
             [InlineKeyboardButton(text="⬅️ Назад в админ-панель", callback_data="admin_panel")]
         ]
     )
+
+
+def get_category_admin_keyboard() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [InlineKeyboardButton(text="➕ Добавить категорию", callback_data="admin_category_add")],
+            [InlineKeyboardButton(text="✏ Переименовать категорию", callback_data="admin_category_rename")],
+            [InlineKeyboardButton(text="❌ Удалить категорию", callback_data="admin_category_delete")],
+            [InlineKeyboardButton(text="⬅️ Назад", callback_data="admin_panel")],
+        ]
+    )
+
+
+def get_category_action_keyboard(callback_prefix: str, back_callback: str = "admin_manage_categories") -> InlineKeyboardMarkup:
+    categories = get_categories()
+    keyboard = []
+
+    for category_key, category in categories.items():
+        tools_count = len(category.get("tools", []))
+        keyboard.append(
+            [
+                InlineKeyboardButton(
+                    text=f"{category['title']} ({tools_count})",
+                    callback_data=f"{callback_prefix}:{category_key}",
+                )
+            ]
+        )
+
+    keyboard.append([InlineKeyboardButton(text="⬅️ Назад", callback_data=back_callback)])
+    return InlineKeyboardMarkup(inline_keyboard=keyboard)
 
 
 def get_admin_categories_keyboard() -> InlineKeyboardMarkup:
@@ -211,7 +264,11 @@ def get_edit_field_prompt(field: str, tool) -> str:
             "Введите новую ссылку на изображение или -, чтобы убрать изображение.\n\n"
             f"Сейчас: {tool['image'] or '-'}"
         ),
-        "category": f"Введите новый ключ категории.\n\nСейчас: {tool['category_key']}",
+        "category": (
+            "Введите ключи категорий через запятую.\n\n"
+            f"Сейчас: {', '.join(get_tool_category_keys(tool['tool_id'])) or '-'}\n\n"
+            f"{get_category_keys_prompt()}"
+        ),
         "rating": "Введите новый рейтинг числом, например 4.8.",
         "cases": (
             "Введите ключи задач через запятую или -, чтобы очистить задачи.\n\n"
@@ -223,11 +280,12 @@ def get_edit_field_prompt(field: str, tool) -> str:
 
 
 @router.message(Command("admin"))
-async def admin_panel(message: Message):
+async def admin_panel(message: Message, state: FSMContext):
     if not is_admin(message.from_user.id):
         await message.answer("У вас нет доступа к этой команде.")
         return
 
+    await state.clear()
     await message.answer(
         get_admin_panel_text(),
         parse_mode="HTML",
@@ -236,10 +294,11 @@ async def admin_panel(message: Message):
 
 
 @router.message(F.text == "🛠 Админ-панель")
-async def admin_panel_button(message: Message):
+async def admin_panel_button(message: Message, state: FSMContext):
     if not is_admin(message.from_user.id):
         return
 
+    await state.clear()
     await message.answer(
         get_admin_panel_text(),
         parse_mode="HTML",
@@ -248,17 +307,213 @@ async def admin_panel_button(message: Message):
 
 
 @router.callback_query(F.data == "admin_panel")
-async def admin_panel_callback(callback: CallbackQuery):
+async def admin_panel_callback(callback: CallbackQuery, state: FSMContext):
     if not is_admin(callback.from_user.id):
         await callback.answer("Нет доступа", show_alert=True)
         return
 
+    await state.clear()
     await callback.message.edit_text(
         get_admin_panel_text(),
         parse_mode="HTML",
         reply_markup=get_admin_keyboard(),
     )
     await callback.answer()
+
+
+@router.callback_query(F.data == "admin_manage_categories")
+async def manage_categories_menu(callback: CallbackQuery, state: FSMContext):
+    if not is_admin(callback.from_user.id):
+        await callback.answer("Нет доступа", show_alert=True)
+        return
+
+    await state.clear()
+    await callback.message.edit_text(
+        "Управление категориями каталога:",
+        reply_markup=get_category_admin_keyboard(),
+    )
+    await callback.answer()
+
+
+@router.callback_query(F.data == "admin_category_add")
+async def add_category_start(callback: CallbackQuery, state: FSMContext):
+    if not is_admin(callback.from_user.id):
+        await callback.answer("Нет доступа", show_alert=True)
+        return
+
+    await state.clear()
+    await callback.message.edit_text(
+        "Введите ключ новой категории латиницей, например `images` или `productivity_tools`.",
+        parse_mode="Markdown",
+        reply_markup=get_category_admin_keyboard(),
+    )
+    await state.set_state(CategoryAdminState.waiting_for_category_key)
+    await callback.answer()
+
+
+@router.callback_query(F.data == "admin_category_rename")
+async def rename_category_start(callback: CallbackQuery, state: FSMContext):
+    if not is_admin(callback.from_user.id):
+        await callback.answer("Нет доступа", show_alert=True)
+        return
+
+    await state.clear()
+    await callback.message.edit_text(
+        "Выберите категорию для переименования:",
+        reply_markup=get_category_action_keyboard("admin_category_rename_select"),
+    )
+    await callback.answer()
+
+
+@router.callback_query(F.data.startswith("admin_category_rename_select:"))
+async def rename_category_select(callback: CallbackQuery, state: FSMContext):
+    if not is_admin(callback.from_user.id):
+        await callback.answer("Нет доступа", show_alert=True)
+        return
+
+    category_key = callback.data.replace("admin_category_rename_select:", "", 1)
+    categories = get_categories()
+    category = categories.get(category_key)
+
+    if not category:
+        await callback.answer("Категория не найдена", show_alert=True)
+        return
+
+    await state.update_data(category_key=category_key)
+    await callback.message.edit_text(
+        f"Введите новое название для категории.\n\nСейчас: {category['title']}",
+        reply_markup=get_category_action_keyboard("admin_category_rename_select"),
+    )
+    await state.set_state(CategoryAdminState.waiting_for_new_category_title)
+    await callback.answer()
+
+
+@router.callback_query(F.data == "admin_category_delete")
+async def delete_category_start(callback: CallbackQuery, state: FSMContext):
+    if not is_admin(callback.from_user.id):
+        await callback.answer("Нет доступа", show_alert=True)
+        return
+
+    await state.clear()
+    await callback.message.edit_text(
+        "Выберите категорию для удаления. Непустую категорию удалить нельзя.",
+        reply_markup=get_category_action_keyboard("admin_category_delete_select"),
+    )
+    await callback.answer()
+
+
+@router.callback_query(F.data.startswith("admin_category_delete_select:"))
+async def delete_category_confirm(callback: CallbackQuery):
+    if not is_admin(callback.from_user.id):
+        await callback.answer("Нет доступа", show_alert=True)
+        return
+
+    category_key = callback.data.replace("admin_category_delete_select:", "", 1)
+    categories = get_categories()
+    category = categories.get(category_key)
+
+    if not category:
+        await callback.answer("Категория не найдена", show_alert=True)
+        return
+
+    deleted, tools_count = delete_category(category_key)
+    if not deleted:
+        await callback.answer(
+            f"В категории ещё есть нейросети: {tools_count}. Сначала перенесите или удалите их.",
+            show_alert=True,
+        )
+        return
+
+    await callback.message.edit_text(
+        f"Категория удалена: {category['title']}",
+        reply_markup=get_category_admin_keyboard(),
+    )
+    await callback.answer("Удалено")
+
+
+@router.message(CategoryAdminState.waiting_for_category_key)
+async def save_new_category_key(message: Message, state: FSMContext):
+    category_key = (message.text or "").strip().lower()
+
+    if not re.fullmatch(r"[a-z0-9_]+", category_key):
+        await message.answer(
+            "Ключ категории должен содержать только латинские буквы, цифры и `_`.",
+            reply_markup=get_category_admin_keyboard(),
+        )
+        return
+
+    if category_exists(category_key):
+        await message.answer(
+            "Категория с таким ключом уже существует. Введите другой ключ.",
+            reply_markup=get_category_admin_keyboard(),
+        )
+        return
+
+    await state.update_data(category_key=category_key)
+    await message.answer(
+        "Теперь введите название категории, которое увидят пользователи.",
+        reply_markup=get_category_admin_keyboard(),
+    )
+    await state.set_state(CategoryAdminState.waiting_for_category_title)
+
+
+@router.message(CategoryAdminState.waiting_for_category_title)
+async def save_new_category_title(message: Message, state: FSMContext):
+    title = (message.text or "").strip()
+    data = await state.get_data()
+    category_key = data.get("category_key")
+
+    if not category_key:
+        await message.answer("Не удалось определить ключ категории.", reply_markup=get_admin_keyboard())
+        await state.clear()
+        return
+
+    if not title:
+        await message.answer(
+            "Название категории не должно быть пустым.",
+            reply_markup=get_category_admin_keyboard(),
+        )
+        return
+
+    add_category(category_key, title)
+    await message.answer(
+        f"Категория добавлена: {title} (`{category_key}`)",
+        parse_mode="Markdown",
+        reply_markup=get_admin_keyboard(),
+    )
+    await state.clear()
+
+
+@router.message(CategoryAdminState.waiting_for_new_category_title)
+async def save_renamed_category_title(message: Message, state: FSMContext):
+    title = (message.text or "").strip()
+    data = await state.get_data()
+    category_key = data.get("category_key")
+
+    if not category_key:
+        await message.answer("Не удалось определить категорию для переименования.", reply_markup=get_admin_keyboard())
+        await state.clear()
+        return
+
+    if not title:
+        await message.answer(
+            "Название категории не должно быть пустым.",
+            reply_markup=get_category_admin_keyboard(),
+        )
+        return
+
+    updated = update_category_title(category_key, title)
+    if not updated:
+        await message.answer("Не удалось переименовать категорию.", reply_markup=get_admin_keyboard())
+        await state.clear()
+        return
+
+    tools_count = count_tools_in_category(category_key)
+    await message.answer(
+        f"Категория обновлена: {title}\nНейросетей в категории: {tools_count}",
+        reply_markup=get_admin_keyboard(),
+    )
+    await state.clear()
 
 @router.callback_query(F.data == "admin_edit_tool")
 async def edit_tool_start(callback: CallbackQuery, state: FSMContext):
@@ -367,10 +622,34 @@ async def save_new_value(message: Message, state: FSMContext):
             return
 
         save_tool_use_cases(tool_id, case_keys)
+    elif field == "category":
+        category_keys = [item.strip() for item in raw_value.split(",") if item.strip()]
+        available_categories = set(get_categories().keys())
+        invalid_category_keys = [category_key for category_key in category_keys if category_key not in available_categories]
+
+        if not category_keys:
+            tool = get_tool_by_id(tool_id)
+            await message.answer(
+                "Укажите хотя бы одну категорию.\n\n" + get_edit_field_prompt("category", tool),
+                reply_markup=get_edit_fields_keyboard(),
+            )
+            return
+
+        if invalid_category_keys:
+            tool = get_tool_by_id(tool_id)
+            await message.answer(
+                "Не нашёл такие категории: "
+                + ", ".join(invalid_category_keys)
+                + "\n\n"
+                + get_edit_field_prompt("category", tool),
+                reply_markup=get_edit_fields_keyboard(),
+            )
+            return
+
+        save_tool_categories(tool_id, category_keys)
     else:
         value = None if field == "image" and raw_value in {"", "-", "нет", "Нет", "no", "No"} else raw_value
-        field_name = "category_key" if field == "category" else field
-        updated = update_tool_field(tool_id, field_name, value)
+        updated = update_tool_field(tool_id, field, value)
 
         if not updated:
             await message.answer("Не удалось обновить нейросеть.", reply_markup=get_admin_keyboard())
@@ -679,7 +958,8 @@ async def add_tool_image(message: Message, state: FSMContext):
 
     await state.update_data(image=image)
     await message.answer(
-        "Введите ключ категории",
+        get_category_keys_prompt(),
+        parse_mode="Markdown",
         reply_markup=get_add_tool_cancel_keyboard(),
     )
     await state.set_state(AddTool.category)
@@ -687,7 +967,31 @@ async def add_tool_image(message: Message, state: FSMContext):
 
 @router.message(AddTool.category)
 async def add_tool_category(message: Message, state: FSMContext):
-    await state.update_data(category=message.text)
+    raw_value = (message.text or "").strip()
+    category_keys = [item.strip() for item in raw_value.split(",") if item.strip()]
+    available_categories = set(get_categories().keys())
+    invalid_category_keys = [category_key for category_key in category_keys if category_key not in available_categories]
+
+    if not category_keys:
+        await message.answer(
+            "Укажите хотя бы одну категорию.\n\n" + get_category_keys_prompt(),
+            parse_mode="Markdown",
+            reply_markup=get_add_tool_cancel_keyboard(),
+        )
+        return
+
+    if invalid_category_keys:
+        await message.answer(
+            "Не нашёл такие категории: "
+            + ", ".join(invalid_category_keys)
+            + "\n\n"
+            + get_category_keys_prompt(),
+            parse_mode="Markdown",
+            reply_markup=get_add_tool_cancel_keyboard(),
+        )
+        return
+
+    await state.update_data(category=category_keys)
     await message.answer(
         get_use_cases_prompt(),
         parse_mode="Markdown",
@@ -723,12 +1027,14 @@ async def add_tool_use_cases_step(message: Message, state: FSMContext):
 
     add_tool(
         tool_id,
-        data["category"],
+        data["category"][0],
         data["name"],
         data["description"],
         data["link"],
         data.get("image"),
     )
+
+    save_tool_categories(tool_id, data["category"])
 
     if case_keys:
         save_tool_use_cases(tool_id, case_keys)

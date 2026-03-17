@@ -16,3 +16,9 @@ class RatingState(StatesGroup):
 
 class UserModerationState(StatesGroup):
     waiting_for_user_id = State()
+
+
+class CategoryAdminState(StatesGroup):
+    waiting_for_category_key = State()
+    waiting_for_category_title = State()
+    waiting_for_new_category_title = State()

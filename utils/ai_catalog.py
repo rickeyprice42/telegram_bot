@@ -16,9 +16,10 @@ def load_catalog():
 
     cursor.execute(
         """
-        SELECT tool_id, category_key, name, description, link, image
-        FROM tools
-        ORDER BY category_key, sort_order, id
+        SELECT t.tool_id, tc.category_key, t.name, t.description, t.link, t.image
+        FROM tools t
+        JOIN tool_categories tc ON t.tool_id = tc.tool_id
+        ORDER BY tc.category_key, t.sort_order, t.id
         """
     )
     tools_rows = cursor.fetchall()
