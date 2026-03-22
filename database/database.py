@@ -7,6 +7,24 @@ from pathlib import Path
 DB_PATH = Path("database/bot.db")
 CATALOG_JSON_PATH = Path("data/ai_tools.json")
 
+TOOL_TAG_COLUMNS = {
+    "free": "tag_free",
+    "easy": "tag_easy",
+    "medium": "tag_medium",
+    "hard": "tag_hard",
+    "fast": "tag_fast",
+    "quality": "tag_quality",
+}
+
+TOOL_TAG_TITLES = {
+    "free": "бесплатная",
+    "easy": "легкая",
+    "medium": "средняя",
+    "hard": "сложная",
+    "fast": "быстрая",
+    "quality": "качественная",
+}
+
 
 def get_connection():
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -132,6 +150,59 @@ def get_use_cases():
     conn.close()
     return rows
 
+
+def use_case_exists(case_key):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        "SELECT 1 FROM use_cases WHERE case_key = ?",
+        (case_key,),
+    )
+    exists = cursor.fetchone() is not None
+    conn.close()
+    return exists
+
+
+def add_use_case(case_key, title, emoji=None):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        INSERT INTO use_cases (case_key, title, emoji)
+        VALUES (?, ?, ?)
+        """,
+        (case_key, title, emoji),
+    )
+    conn.commit()
+    conn.close()
+
+
+def delete_use_case(case_key):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT title FROM use_cases WHERE case_key = ?",
+        (case_key,),
+    )
+    row = cursor.fetchone()
+    if not row:
+        conn.close()
+        return None
+
+    cursor.execute(
+        "DELETE FROM tool_use_cases WHERE case_key = ?",
+        (case_key,),
+    )
+    cursor.execute(
+        "DELETE FROM use_cases WHERE case_key = ?",
+        (case_key,),
+    )
+
+    conn.commit()
+    conn.close()
+    return row["title"]
+
 def save_tool_use_cases(tool_id, case_keys):
     conn = get_connection()
     cursor = conn.cursor()
@@ -148,6 +219,80 @@ def save_tool_use_cases(tool_id, case_keys):
     conn.commit()
     conn.close()
 
+
+def get_available_tool_tags():
+    return [(tag_key, TOOL_TAG_TITLES[tag_key]) for tag_key in TOOL_TAG_COLUMNS]
+
+
+def get_tool_tag_keys(tool_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+    selected_columns = ", ".join(TOOL_TAG_COLUMNS.values())
+    cursor.execute(
+        f"SELECT {selected_columns} FROM tools WHERE tool_id = ?",
+        (tool_id,),
+    )
+    row = cursor.fetchone()
+    conn.close()
+
+    if not row:
+        return []
+
+    return [
+        tag_key
+        for tag_key, column_name in TOOL_TAG_COLUMNS.items()
+        if row[column_name]
+    ]
+
+
+def save_tool_tags(tool_id, tag_keys):
+    unique_tag_keys = list(dict.fromkeys(tag_keys))
+    invalid_tag_keys = [tag_key for tag_key in unique_tag_keys if tag_key not in TOOL_TAG_COLUMNS]
+    if invalid_tag_keys:
+        raise ValueError(f"Unsupported tags: {', '.join(invalid_tag_keys)}")
+
+    conn = get_connection()
+    cursor = conn.cursor()
+    assignments = ", ".join(f"{column_name} = ?" for column_name in TOOL_TAG_COLUMNS.values())
+    values = [1 if tag_key in unique_tag_keys else 0 for tag_key in TOOL_TAG_COLUMNS]
+    cursor.execute(
+        f"UPDATE tools SET {assignments} WHERE tool_id = ?",
+        (*values, tool_id),
+    )
+    conn.commit()
+    conn.close()
+
+def get_top3_tools(category_key):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT
+            t.name,
+            t.image,
+            COUNT(DISTINCT f.user_id) AS favorites_count,
+            COALESCE(r.rating, 0) AS external_rating,
+            (COUNT(DISTINCT f.user_id) * 2 + COALESCE(r.rating, 0)) AS score
+        FROM tools t
+        JOIN tool_categories tc ON t.tool_id = tc.tool_id
+        LEFT JOIN favorites f ON t.tool_id = f.tool_id
+        LEFT JOIN tool_ratings r ON t.tool_id = r.tool_id
+        WHERE tc.category_key = ?
+        GROUP BY t.tool_id
+        ORDER BY score DESC, t.sort_order ASC, t.id ASC
+        LIMIT 3
+    """, (category_key,))
+
+    tools = cursor.fetchall()
+    conn.close()
+
+    return [
+        {
+            "name": tool["name"],
+            "image": tool["image"]
+        }
+        for tool in tools
+    ]
 
 def delete_tool(tool_id):
     conn = get_connection()
@@ -188,6 +333,8 @@ def get_top_tools_by_category(category_key):
     SELECT 
         t.tool_id,
         t.name,
+        t.image,
+        t.link,
         COUNT(DISTINCT f.user_id) AS favorites_count,
         COALESCE(r.rating, 0) AS external_rating,
         (COUNT(DISTINCT f.user_id) * 2 + COALESCE(r.rating, 0)) AS score
@@ -463,10 +610,22 @@ def init_db():
         description TEXT NOT NULL,
         link TEXT NOT NULL,
         image TEXT,
+        tag_free INTEGER DEFAULT 0,
+        tag_easy INTEGER DEFAULT 0,
+        tag_medium INTEGER DEFAULT 0,
+        tag_hard INTEGER DEFAULT 0,
+        tag_fast INTEGER DEFAULT 0,
+        tag_quality INTEGER DEFAULT 0,
         sort_order INTEGER DEFAULT 0,
         FOREIGN KEY (category_key) REFERENCES categories(category_key)
     )
     """)
+
+    cursor.execute("PRAGMA table_info(tools)")
+    tool_columns = {row["name"] for row in cursor.fetchall()}
+    for column_name in TOOL_TAG_COLUMNS.values():
+        if column_name not in tool_columns:
+            cursor.execute(f"ALTER TABLE tools ADD COLUMN {column_name} INTEGER DEFAULT 0")
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS tool_ratings (

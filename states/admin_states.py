@@ -8,6 +8,7 @@ class AddTool(StatesGroup):
     category = State()
     image = State()
     use_cases = State()
+    tags = State()
 
 
 class RatingState(StatesGroup):
@@ -22,3 +23,9 @@ class CategoryAdminState(StatesGroup):
     waiting_for_category_key = State()
     waiting_for_category_title = State()
     waiting_for_new_category_title = State()
+
+
+class UseCaseAdminState(StatesGroup):
+    waiting_for_case_key = State()
+    waiting_for_case_title = State()
+    waiting_for_case_emoji = State()

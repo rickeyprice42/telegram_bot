@@ -36,15 +36,9 @@ async def show_top_ai_categories(message: Message):
         reply_markup=get_top_ai_categories_keyboard(categories),
     )
 
-
-@router.message(F.text == "⚙️ Настройки")
-async def settings_handler(message: Message):
-    await message.answer("Здесь будут настройки.")
-
-
-@router.message(F.text == "ℹ️ Помощь")
-async def help_handler(message: Message):
+@router.message(F.text == "💎 AI PRO")
+async def ai_pro_handler(message: Message):
     await message.answer(
-        "Это тестовый бот.\n\n"
-        "Функции будут добавляться постепенно."
+        "💎 AI PRO\n\n"
+        "Функция платной подписки находится в разработке и будет доступна в ближайшее время."
     )

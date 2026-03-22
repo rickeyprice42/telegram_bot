@@ -10,25 +10,31 @@ from config import ADMIN_IDS
 from database.database import (
     add_category,
     add_tool,
+    add_use_case,
     category_exists,
     count_tools_in_category,
     delete_category,
     delete_tool,
+    delete_use_case,
     generate_unique_tool_id,
     get_all_tools,
+    get_available_tool_tags,
     get_tool_by_id,
     get_tool_category_keys,
+    get_tool_tag_keys,
     get_tool_use_case_keys,
     get_use_cases,
     save_tool_rating,
     save_tool_categories,
+    save_tool_tags,
     save_tool_use_cases,
     update_category_title,
     update_tool_field,
+    use_case_exists,
 )
 from database.models import ban_user, get_all_users, get_users_count, unban_user
 from keyboards.catalog_keyboard import get_catalog_keyboard
-from states.admin_states import AddTool, CategoryAdminState, RatingState, UserModerationState
+from states.admin_states import AddTool, CategoryAdminState, RatingState, UseCaseAdminState, UserModerationState
 from states.broadcast_state import BroadcastState
 from states.catalog_states import CatalogStates
 from utils.ai_catalog import get_categories
@@ -49,6 +55,20 @@ def get_use_cases_prompt() -> str:
     for case_key, title, emoji in use_cases:
         prefix = f"{emoji} " if emoji else ""
         lines.append(f"- {case_key} — {prefix}{title}")
+
+    return "\n".join(lines)
+
+
+def get_tool_tags_prompt() -> str:
+    lines = [
+        "Введите ключи меток через запятую.",
+        "Если метки не нужны, отправьте `-`.",
+        "",
+        "Доступные метки:",
+    ]
+
+    for tag_key, title in get_available_tool_tags():
+        lines.append(f"- {tag_key} — {title}")
 
     return "\n".join(lines)
 
@@ -82,7 +102,10 @@ def get_admin_keyboard() -> InlineKeyboardMarkup:
                 InlineKeyboardButton(text="➕ Добавить нейросеть", callback_data="admin_add_tool"),
                 InlineKeyboardButton(text="✏ Редактировать нейросеть", callback_data="admin_edit_tool")
             ],
-            [InlineKeyboardButton(text="🗂 Категории каталога", callback_data="admin_manage_categories")],
+            [
+                InlineKeyboardButton(text="🗂 Категории каталога", callback_data="admin_manage_categories"),
+                InlineKeyboardButton(text="🧠 Задачи подбора", callback_data="admin_manage_use_cases"),
+            ],
             [
                 InlineKeyboardButton(text="📢 Рассылка", callback_data="admin_broadcast"),
                 InlineKeyboardButton(text="⭐ Обновить рейтинг AI", callback_data="admin_update_rating"),
@@ -136,6 +159,34 @@ def get_category_admin_keyboard() -> InlineKeyboardMarkup:
             [InlineKeyboardButton(text="⬅️ Назад", callback_data="admin_panel")],
         ]
     )
+
+
+def get_use_case_admin_keyboard() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [InlineKeyboardButton(text="➕ Добавить задачу", callback_data="admin_use_case_add")],
+            [InlineKeyboardButton(text="❌ Удалить задачу", callback_data="admin_use_case_delete")],
+            [InlineKeyboardButton(text="⬅️ Назад", callback_data="admin_panel")],
+        ]
+    )
+
+
+def get_use_case_action_keyboard(callback_prefix: str, back_callback: str = "admin_manage_use_cases") -> InlineKeyboardMarkup:
+    keyboard = []
+
+    for case_key, title, emoji in get_use_cases():
+        prefix = f"{emoji} " if emoji else ""
+        keyboard.append(
+            [
+                InlineKeyboardButton(
+                    text=f"{prefix}{title} ({case_key})",
+                    callback_data=f"{callback_prefix}:{case_key}",
+                )
+            ]
+        )
+
+    keyboard.append([InlineKeyboardButton(text="⬅️ Назад", callback_data=back_callback)])
+    return InlineKeyboardMarkup(inline_keyboard=keyboard)
 
 
 def get_category_action_keyboard(callback_prefix: str, back_callback: str = "admin_manage_categories") -> InlineKeyboardMarkup:
@@ -250,6 +301,7 @@ def get_edit_fields_keyboard() -> InlineKeyboardMarkup:
             [InlineKeyboardButton(text="Категория", callback_data="edit_field:category")],
             [InlineKeyboardButton(text="Рейтинг", callback_data="edit_field:rating")],
             [InlineKeyboardButton(text="Задачи", callback_data="edit_field:cases")],
+            [InlineKeyboardButton(text="Метки", callback_data="edit_field:tags")],
             [InlineKeyboardButton(text="⬅️ К списку", callback_data="admin_edit_tool")],
         ]
     )
@@ -274,6 +326,11 @@ def get_edit_field_prompt(field: str, tool) -> str:
             "Введите ключи задач через запятую или -, чтобы очистить задачи.\n\n"
             f"Сейчас: {', '.join(get_tool_use_case_keys(tool['tool_id'])) or '-'}\n\n"
             f"{get_use_cases_prompt()}"
+        ),
+        "tags": (
+            "Введите ключи меток через запятую или -, чтобы очистить метки.\n\n"
+            f"Сейчас: {', '.join(get_tool_tag_keys(tool['tool_id'])) or '-'}\n\n"
+            f"{get_tool_tags_prompt()}"
         ),
     }
     return prompts[field]
@@ -333,6 +390,71 @@ async def manage_categories_menu(callback: CallbackQuery, state: FSMContext):
         reply_markup=get_category_admin_keyboard(),
     )
     await callback.answer()
+
+
+@router.callback_query(F.data == "admin_manage_use_cases")
+async def manage_use_cases_menu(callback: CallbackQuery, state: FSMContext):
+    if not is_admin(callback.from_user.id):
+        await callback.answer("Нет доступа", show_alert=True)
+        return
+
+    await state.clear()
+    await callback.message.edit_text(
+        "Управление задачами для раздела 'Подобрать нейросеть':",
+        reply_markup=get_use_case_admin_keyboard(),
+    )
+    await callback.answer()
+
+
+@router.callback_query(F.data == "admin_use_case_add")
+async def add_use_case_start(callback: CallbackQuery, state: FSMContext):
+    if not is_admin(callback.from_user.id):
+        await callback.answer("Нет доступа", show_alert=True)
+        return
+
+    await state.clear()
+    await callback.message.edit_text(
+        "Введите ключ новой задачи латиницей, например `text`, `presentations` или `marketing_tools`.",
+        parse_mode="Markdown",
+        reply_markup=get_use_case_admin_keyboard(),
+    )
+    await state.set_state(UseCaseAdminState.waiting_for_case_key)
+    await callback.answer()
+
+
+@router.callback_query(F.data == "admin_use_case_delete")
+async def delete_use_case_start(callback: CallbackQuery, state: FSMContext):
+    if not is_admin(callback.from_user.id):
+        await callback.answer("Нет доступа", show_alert=True)
+        return
+
+    await state.clear()
+    await callback.message.edit_text(
+        "Выберите задачу для удаления:",
+        reply_markup=get_use_case_action_keyboard("admin_use_case_delete_select"),
+    )
+    await callback.answer()
+
+
+@router.callback_query(F.data.startswith("admin_use_case_delete_select:"))
+async def delete_use_case_confirm(callback: CallbackQuery):
+    if not is_admin(callback.from_user.id):
+        await callback.answer("Нет доступа", show_alert=True)
+        return
+
+    case_key = callback.data.replace("admin_use_case_delete_select:", "", 1)
+    deleted_title = delete_use_case(case_key)
+
+    if not deleted_title:
+        await callback.answer("Задача не найдена", show_alert=True)
+        return
+
+    await callback.message.edit_text(
+        f"Задача удалена: {deleted_title} (`{case_key}`)",
+        parse_mode="Markdown",
+        reply_markup=get_use_case_admin_keyboard(),
+    )
+    await callback.answer("Удалено")
 
 
 @router.callback_query(F.data == "admin_category_add")
@@ -515,6 +637,83 @@ async def save_renamed_category_title(message: Message, state: FSMContext):
     )
     await state.clear()
 
+
+@router.message(UseCaseAdminState.waiting_for_case_key)
+async def save_new_use_case_key(message: Message, state: FSMContext):
+    case_key = (message.text or "").strip().lower()
+
+    if not re.fullmatch(r"[a-z0-9_]+", case_key):
+        await message.answer(
+            "Ключ задачи должен содержать только латинские буквы, цифры и `_`.",
+            reply_markup=get_use_case_admin_keyboard(),
+        )
+        return
+
+    if use_case_exists(case_key):
+        await message.answer(
+            "Задача с таким ключом уже существует. Введите другой ключ.",
+            reply_markup=get_use_case_admin_keyboard(),
+        )
+        return
+
+    await state.update_data(case_key=case_key)
+    await message.answer(
+        "Теперь введите название задачи, которое увидят пользователи.",
+        reply_markup=get_use_case_admin_keyboard(),
+    )
+    await state.set_state(UseCaseAdminState.waiting_for_case_title)
+
+
+@router.message(UseCaseAdminState.waiting_for_case_title)
+async def save_new_use_case_title(message: Message, state: FSMContext):
+    title = (message.text or "").strip()
+    data = await state.get_data()
+    case_key = data.get("case_key")
+
+    if not case_key:
+        await message.answer("Не удалось определить ключ задачи.", reply_markup=get_admin_keyboard())
+        await state.clear()
+        return
+
+    if not title:
+        await message.answer(
+            "Название задачи не должно быть пустым.",
+            reply_markup=get_use_case_admin_keyboard(),
+        )
+        return
+
+    await state.update_data(case_title=title)
+    await message.answer(
+        "Отправьте эмодзи для задачи или `-`, если эмодзи не нужен.",
+        parse_mode="Markdown",
+        reply_markup=get_use_case_admin_keyboard(),
+    )
+    await state.set_state(UseCaseAdminState.waiting_for_case_emoji)
+
+
+@router.message(UseCaseAdminState.waiting_for_case_emoji)
+async def save_new_use_case_emoji(message: Message, state: FSMContext):
+    raw_emoji = (message.text or "").strip()
+    emoji = None if raw_emoji in {"", "-", "нет", "Нет", "no", "No"} else raw_emoji
+
+    data = await state.get_data()
+    case_key = data.get("case_key")
+    title = data.get("case_title")
+
+    if not case_key or not title:
+        await message.answer("Не удалось определить данные задачи.", reply_markup=get_admin_keyboard())
+        await state.clear()
+        return
+
+    add_use_case(case_key, title, emoji)
+    prefix = f"{emoji} " if emoji else ""
+    await message.answer(
+        f"Задача добавлена: {prefix}{title} (`{case_key}`)",
+        parse_mode="Markdown",
+        reply_markup=get_admin_keyboard(),
+    )
+    await state.clear()
+
 @router.callback_query(F.data == "admin_edit_tool")
 async def edit_tool_start(callback: CallbackQuery, state: FSMContext):
     if not is_admin(callback.from_user.id):
@@ -559,7 +758,7 @@ async def choose_field(callback: CallbackQuery, state: FSMContext):
         return
 
     field = callback.data.replace("edit_field:", "", 1)
-    allowed_fields = {"name", "description", "link", "image", "category", "rating", "cases"}
+    allowed_fields = {"name", "description", "link", "image", "category", "rating", "cases", "tags"}
     if field not in allowed_fields:
         await callback.answer("Неизвестное поле для редактирования", show_alert=True)
         return
@@ -622,6 +821,26 @@ async def save_new_value(message: Message, state: FSMContext):
             return
 
         save_tool_use_cases(tool_id, case_keys)
+    elif field == "tags":
+        tag_keys = []
+        if raw_value not in {"", "-", "нет", "Нет", "no", "No"}:
+            tag_keys = [item.strip() for item in raw_value.split(",") if item.strip()]
+
+        available_tag_keys = {tag_key for tag_key, _ in get_available_tool_tags()}
+        invalid_tag_keys = [tag_key for tag_key in tag_keys if tag_key not in available_tag_keys]
+
+        if invalid_tag_keys:
+            tool = get_tool_by_id(tool_id)
+            await message.answer(
+                "Не нашел такие ключи меток: "
+                + ", ".join(invalid_tag_keys)
+                + "\n\n"
+                + get_edit_field_prompt("tags", tool),
+                reply_markup=get_edit_fields_keyboard(),
+            )
+            return
+
+        save_tool_tags(tool_id, tag_keys)
     elif field == "category":
         category_keys = [item.strip() for item in raw_value.split(",") if item.strip()]
         available_categories = set(get_categories().keys())
@@ -1022,6 +1241,37 @@ async def add_tool_use_cases_step(message: Message, state: FSMContext):
         )
         return
 
+    await state.update_data(use_case_keys=case_keys)
+    await message.answer(
+        get_tool_tags_prompt(),
+        parse_mode="Markdown",
+        reply_markup=get_add_tool_cancel_keyboard(),
+    )
+    await state.set_state(AddTool.tags)
+
+
+@router.message(AddTool.tags)
+async def add_tool_tags_step(message: Message, state: FSMContext):
+    raw_value = (message.text or "").strip()
+    tag_keys = []
+
+    if raw_value not in {"", "-", "нет", "Нет", "no", "No"}:
+        tag_keys = [item.strip() for item in raw_value.split(",") if item.strip()]
+
+    available_tag_keys = {tag_key for tag_key, _ in get_available_tool_tags()}
+    invalid_tag_keys = [tag_key for tag_key in tag_keys if tag_key not in available_tag_keys]
+
+    if invalid_tag_keys:
+        await message.answer(
+            "Не нашел такие ключи меток: "
+            + ", ".join(invalid_tag_keys)
+            + "\n\n"
+            + get_tool_tags_prompt(),
+            parse_mode="Markdown",
+            reply_markup=get_add_tool_cancel_keyboard(),
+        )
+        return
+
     data = await state.get_data()
     tool_id = generate_unique_tool_id(data["name"])
 
@@ -1036,8 +1286,12 @@ async def add_tool_use_cases_step(message: Message, state: FSMContext):
 
     save_tool_categories(tool_id, data["category"])
 
+    case_keys = data.get("use_case_keys", [])
     if case_keys:
         save_tool_use_cases(tool_id, case_keys)
+
+    if tag_keys:
+        save_tool_tags(tool_id, tag_keys)
 
     await message.answer(
         f"Нейросеть добавлена!\nID: `{tool_id}`",

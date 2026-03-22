@@ -911,3 +911,186 @@
 2026-03-17 21:26:21,391 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:picker_back
 2026-03-17 21:26:29,225 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pick_text
 2026-03-17 21:26:31,176 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:picker_back
+2026-03-18 20:39:26,709 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=/start
+2026-03-18 20:40:10,904 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=💎 AI PRO
+2026-03-18 20:49:17,808 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-18 20:49:20,028 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_sites
+2026-03-18 20:49:21,165 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_back
+2026-03-18 20:49:27,579 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_programming
+2026-03-18 20:49:31,761 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_back
+2026-03-18 21:07:02,900 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=💎 AI PRO
+2026-03-18 21:08:01,972 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=💎 AI PRO
+2026-03-18 22:13:25,034 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-18 22:13:26,802 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_images
+2026-03-18 22:14:15,027 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_back
+2026-03-18 22:14:17,662 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_sites
+2026-03-18 22:14:20,368 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_back
+2026-03-18 22:14:21,972 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_programming
+2026-03-18 22:14:28,611 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_back
+2026-03-18 22:14:30,539 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_presentations
+2026-03-18 22:14:34,828 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_back
+2026-03-18 22:14:35,995 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_images
+2026-03-18 22:14:40,370 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-18 22:14:42,367 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_images
+2026-03-18 22:14:44,784 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:1
+2026-03-18 22:14:46,364 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:2
+2026-03-18 22:14:47,763 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pg:images:3
+2026-03-18 22:14:49,677 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:fav:stable-diffusion-3-5
+2026-03-18 22:14:50,871 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-18 22:14:53,414 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-18 22:14:54,577 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_images
+2026-03-18 22:14:59,597 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🛠 Админ-панель
+2026-03-18 22:15:05,984 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:admin_update_rating
+2026-03-18 22:15:10,669 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:rating_tool:nano-banana
+2026-03-18 22:15:18,691 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=49
+2026-03-18 22:15:23,514 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-18 22:15:26,480 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-18 22:15:27,776 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_images
+2026-03-18 22:15:37,798 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_back
+2026-03-18 22:15:39,818 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_programming
+2026-03-18 22:16:41,930 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🛠 Админ-панель
+2026-03-18 22:16:44,278 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:admin_update_rating
+2026-03-18 22:17:05,619 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:rating_tool:codex
+2026-03-18 22:17:08,323 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=50
+2026-03-18 22:17:11,093 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-18 22:17:12,446 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_programming
+2026-03-18 22:17:24,711 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_back
+2026-03-18 22:17:28,052 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_programming
+2026-03-18 22:17:36,125 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-18 22:17:37,061 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_images
+2026-03-18 22:18:19,318 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-18 22:18:20,598 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_images
+2026-03-18 22:22:38,183 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-18 22:22:39,439 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_images
+2026-03-18 22:22:45,257 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_back
+2026-03-18 22:22:46,647 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_programming
+2026-03-18 22:23:00,673 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🛠 Админ-панель
+2026-03-18 22:23:02,313 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:admin_update_rating
+2026-03-18 22:23:04,505 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:rating_tool:codex
+2026-03-18 22:23:07,583 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=54
+2026-03-18 22:23:11,573 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-18 22:23:12,626 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_programming
+2026-03-18 22:47:48,623 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-18 22:47:50,937 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_images
+2026-03-18 22:50:10,699 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-18 22:50:12,217 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_images
+2026-03-18 22:55:03,953 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-18 22:55:05,133 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_programming
+2026-03-18 22:55:49,689 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-18 22:55:55,398 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_presentations
+2026-03-18 22:56:23,649 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-18 22:56:26,206 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_sites
+2026-03-18 22:59:20,362 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-18 22:59:21,373 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_images
+2026-03-18 22:59:54,622 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_back
+2026-03-18 23:00:17,684 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_programming
+2026-03-18 23:00:27,660 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_back
+2026-03-18 23:00:31,495 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_presentations
+2026-03-22 22:27:01,291 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-22 22:27:02,860 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-22 22:27:06,457 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_images
+2026-03-22 22:32:29,447 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-22 22:32:30,964 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_images
+2026-03-22 22:32:54,258 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-22 22:32:55,796 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_programming
+2026-03-22 22:33:14,492 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-22 22:33:17,089 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_presentations
+2026-03-22 22:38:25,481 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-22 22:38:26,674 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_images
+2026-03-22 22:38:55,387 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-22 22:38:57,174 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_programming
+2026-03-22 22:46:15,406 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-22 22:46:16,688 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_images
+2026-03-22 22:50:30,611 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-22 22:50:34,998 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_images
+2026-03-22 22:50:53,531 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-22 22:50:54,585 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_programming
+2026-03-22 22:51:28,855 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-22 22:51:30,196 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_presentations
+2026-03-22 22:51:47,640 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-22 22:51:49,796 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_sites
+2026-03-22 22:55:35,873 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-22 22:55:37,310 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_images
+2026-03-22 22:56:11,593 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_back
+2026-03-22 22:59:13,977 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-22 22:59:15,447 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_images
+2026-03-22 22:59:34,322 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_back
+2026-03-22 22:59:36,455 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_programming
+2026-03-22 22:59:53,620 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_back
+2026-03-22 23:05:43,104 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🛠 Админ-панель
+2026-03-22 23:05:47,677 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:admin_manage_use_cases
+2026-03-22 23:05:50,630 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:admin_use_case_add
+2026-03-22 23:06:03,641 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:admin_panel
+2026-03-22 23:06:05,103 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:admin_manage_use_cases
+2026-03-22 23:06:06,559 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:admin_use_case_delete
+2026-03-22 23:06:12,925 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:admin_manage_use_cases
+2026-03-22 23:06:14,704 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:admin_use_case_add
+2026-03-22 23:06:27,359 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=site
+2026-03-22 23:06:51,729 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=👨‍💻 Создать сайт
+2026-03-22 23:06:58,831 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=-
+2026-03-22 23:07:04,059 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🤖 Подобрать нейросеть
+2026-03-22 23:07:09,766 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pick_site
+2026-03-22 23:07:10,876 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:picker_back
+2026-03-22 23:07:13,402 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-22 23:07:16,549 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_sites
+2026-03-22 23:07:18,039 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:cat_menu
+2026-03-22 23:07:19,540 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🛠 Админ-панель
+2026-03-22 23:09:27,312 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:admin_manage_use_cases
+2026-03-22 23:09:28,586 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:admin_use_case_delete
+2026-03-22 23:09:29,716 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:admin_use_case_delete_select:site
+2026-03-22 23:09:31,962 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:admin_use_case_add
+2026-03-22 23:09:35,623 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=site
+2026-03-22 23:09:41,614 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=Создать сайт
+2026-03-22 23:09:46,018 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=👨‍💻
+2026-03-22 23:09:50,402 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🤖 Подобрать нейросеть
+2026-03-22 23:09:51,621 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pick_site
+2026-03-22 23:10:08,531 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:picker_back
+2026-03-22 23:11:07,394 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🛠 Админ-панель
+2026-03-22 23:11:10,701 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:admin_manage_categories
+2026-03-22 23:11:12,074 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:admin_category_rename
+2026-03-22 23:11:16,507 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:admin_category_rename_select:images
+2026-03-22 23:11:43,871 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🧑‍🎨 Генерация изображений
+2026-03-22 23:11:49,009 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-22 23:11:50,234 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_images
+2026-03-22 23:12:20,232 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_back
+2026-03-22 23:12:26,017 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🤖 Подобрать нейросеть
+2026-03-22 23:12:29,859 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pick_site
+2026-03-22 23:12:39,419 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:admin_edit_tool
+2026-03-22 23:12:42,955 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:edit_tool:framer-ai
+2026-03-22 23:12:44,771 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:edit_field:cases
+2026-03-22 23:12:54,023 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=site
+2026-03-22 23:12:59,214 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🤖 Подобрать нейросеть
+2026-03-22 23:13:00,243 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pick_site
+2026-03-22 23:13:02,115 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:picker_back
+2026-03-22 23:13:11,615 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pick_site
+2026-03-22 23:13:15,685 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:picker_back
+2026-03-22 23:56:20,738 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🛠 Админ-панель
+2026-03-22 23:56:22,446 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:admin_edit_tool
+2026-03-22 23:56:24,000 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:edit_tool:recraft-ai
+2026-03-22 23:56:25,954 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:edit_field:tags
+2026-03-22 23:56:46,494 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=free, fast
+2026-03-23 00:00:25,816 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🤖 Подобрать нейросеть
+2026-03-23 00:00:30,365 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pick_case:image
+2026-03-23 00:00:39,066 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pick_level:image:easy
+2026-03-23 00:00:41,235 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pick_pref:image:easy:free
+2026-03-23 00:00:51,295 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pick_case:image
+2026-03-23 00:00:53,267 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pick_level:image:medium
+2026-03-23 00:00:55,687 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pick_pref:image:medium:quality
+2026-03-23 00:01:15,137 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🛠 Админ-панель
+2026-03-23 00:01:16,875 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:admin_edit_tool
+2026-03-23 00:01:18,419 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:edit_tool:recraft-ai
+2026-03-23 00:01:20,558 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:edit_field:tags
+2026-03-23 00:01:40,394 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=medium, free
+2026-03-23 00:01:43,805 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🤖 Подобрать нейросеть
+2026-03-23 00:01:45,609 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pick_case:image
+2026-03-23 00:01:47,188 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pick_level:image:medium
+2026-03-23 00:01:48,960 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pick_pref:image:medium:free
+2026-03-23 00:11:16,343 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🤖 Подобрать нейросеть
+2026-03-23 00:11:17,978 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pick_case:image
+2026-03-23 00:11:19,835 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pick_level:image:medium
+2026-03-23 00:11:25,335 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:pick_pref:image:medium:free
+2026-03-23 00:11:45,019 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:picker_back
+2026-03-23 00:11:51,213 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=📚 Каталог нейросетей
+2026-03-23 00:11:53,549 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=🔥 Лучшие AI
+2026-03-23 00:12:03,690 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_images
+2026-03-23 00:12:23,277 | INFO | USER_ACTION user_id=1600643157 username=rickeyprice name=rickey action=callback:top_ai_back
